@@ -25,7 +25,12 @@ public class DataBaseService {
     private static final String SELECT_ALL_COMMENTS = "SELECT * FROM comments";
     private static final String SELECT_ALL_GAMEOBJECTS = "SELECT * FROM gameobjects";
     private static final String SELECT_ALL_GAMES = "SELECT * FROM games";
-    private static final String DELETE_ALL = "";
+    //private static final String DELETE_ALL = "";
+    private static final String SELECT_ALL_COMMENTS_WITH_USER_ID = "SELECT * FROM comments WHERE author_id=";
+    private static final String SELECT_ALL_USERS_WITH_ID = "SELECT * FROM users WHERE id=";
+    private static final String SELECT_ALL_GAMEOBJECTS_WITH_ID = "SELECT * FROM users WHERE id=";
+    private static final String SELECT_ALL_GAMES_WITH_ID = "SELECT * FROM users WHERE id=";
+
 
     PreparedStatement preparedStatement = null;
 
@@ -55,9 +60,9 @@ public class DataBaseService {
 
     ResultSet result = null;
 
-    public List<Comment> getComments() throws SQLException {
+    public List<Comment> getComments(String command) throws SQLException {
         List<Comment> comments = new ArrayList<>();
-        result = statement.executeQuery(SELECT_ALL_COMMENTS);
+        result = statement.executeQuery(command);
         while (result.next()) {
             comments.add(new Comment(result.getInt("id"),
                     result.getString("message"),
@@ -80,9 +85,9 @@ public class DataBaseService {
         preparedStatement.execute();
     }
 
-    public List<User> getUsers() throws SQLException {
+    public List<User> getUsers(String command) throws SQLException {
         List<User> users = new ArrayList<>();
-        result = statement.executeQuery(SELECT_ALL_USERS);
+        result = statement.executeQuery(command);
         while (result.next()) {
             users.add(new User(result.getInt("id"),
                     result.getString("first_name"),
@@ -107,9 +112,9 @@ public class DataBaseService {
         preparedStatement.execute();
     }
 
-    public List<GameObject> getGameObjects() throws SQLException {
+    public List<GameObject> getGameObjects(String command) throws SQLException {
         List<GameObject> gameObjects = new ArrayList<>();
-        result = statement.executeQuery(SELECT_ALL_GAMEOBJECTS);
+        result = statement.executeQuery(command);
         while (result.next()) {
             gameObjects.add(
                     new GameObject(result.getInt("id"),
@@ -135,9 +140,9 @@ public class DataBaseService {
         preparedStatement.execute();
     }
 
-    public List<Game> getGames() throws SQLException {
+    public List<Game> getGames(String command) throws SQLException {
         List<Game> games = new ArrayList<>();
-        result = statement.executeQuery(SELECT_ALL_GAMES);
+        result = statement.executeQuery(command);
         while (result.next()) {
             games.add(
                     new Game(result.getInt("id"),
