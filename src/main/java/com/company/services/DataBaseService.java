@@ -17,19 +17,25 @@ public class DataBaseService {
     String PASSWORD = "root";
     private static final @Getter
     String USER = "root";
-    private static final String INSERT_NEW_COMMENT = "INSERT INTO comments VALUES (?,?,?,?,?,?)";
-    private static final String INSERT_NEW_USER = "INSERT INTO users VALUES (?,?,?,?,?,?,?)";
-    private static final String INSERT_NEW_GAMEOBJECT = "INSERT INTO gameobjects VALUES (?,?,?,?,?,?,?)";
-    private static final String INSERT_NEW_GAME = "INSERT INTO games VALUES (?,?)";
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
-    private static final String SELECT_ALL_COMMENTS = "SELECT * FROM comments";
-    private static final String SELECT_ALL_GAMEOBJECTS = "SELECT * FROM gameobjects";
-    private static final String SELECT_ALL_GAMES = "SELECT * FROM games";
-    //private static final String DELETE_ALL = "";
-    private static final String SELECT_ALL_COMMENTS_WITH_USER_ID = "SELECT * FROM comments WHERE author_id=";
-    private static final String SELECT_ALL_USERS_WITH_ID = "SELECT * FROM users WHERE id=";
-    private static final String SELECT_ALL_GAMEOBJECTS_WITH_ID = "SELECT * FROM users WHERE id=";
-    private static final String SELECT_ALL_GAMES_WITH_ID = "SELECT * FROM users WHERE id=";
+    private static final String INSERT_NEW_COMMENT = "INSERT INTO comments (author_id,message,post_id,created_at,approved) VALUES(?,?,?,?,?) ";
+    private static final String INSERT_NEW_USER = "INSERT INTO users (first_name, last_name, password, email, created_at, role)VALUES (?,?,?,?,?,?)";
+    private static final String INSERT_NEW_GAMEOBJECT = "INSERT INTO gameobjects (game_id, title, text, status, created_at, updated_at) VALUES (?,?,?,?,?,?)";
+    private static final String INSERT_NEW_GAME = "INSERT INTO games (name)VALUES (?)";
+    private static final String INSERT_NEW_POST = "INSERT INTO posts (dealer_id) VALUES(?)";
+
+    public static final String SELECT_ALL_USERS = "SELECT * FROM users";
+    public static final String SELECT_ALL_COMMENTS = "SELECT * FROM comments";
+    public static final String SELECT_ALL_GAMEOBJECTS = "SELECT * FROM gameobjects";
+    public static final String SELECT_ALL_GAMES = "SELECT * FROM games";
+    public static final String SELECT_ALL_POSTS = "SELECT * FROM posts";
+
+    private static final String DELETE_ALL = "";
+    public static final String SELECT_ALL_COMMENTS_WITH_USER_ID = "SELECT * FROM comments WHERE author_id=";
+    public static final String SELECT_COMMENT_WITH_ID = "SELECT * FROM comments WHERE id=";
+    public static final String SELECT_USER_WITH_ID = "SELECT * FROM users WHERE id=";
+    public static final String SELECT_ALL_GAMEOBJECTS_WITH_POST_ID = "SELECT * FROM users WHERE post_id=";
+    public static final String SELECT_ALL_GAMES_WITH_ID = "SELECT * FROM users WHERE id=";
+    public static final String SELECT_ALL_POSTS_WITH_DEALER_ID = "SELECT * FROM posts WHERE dealer_id=";
 
 
     PreparedStatement preparedStatement = null;
@@ -74,17 +80,6 @@ public class DataBaseService {
         return comments;
     }
 
-    public void addComment(Comment comment) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_COMMENT);
-        preparedStatement.setInt(1, comment.getId());
-        preparedStatement.setInt(2, comment.getAuthorId());
-        preparedStatement.setString(3, comment.getMessage());
-        preparedStatement.setInt(4, comment.getPostId());
-        preparedStatement.setDate(5, comment.getCreatedAt());
-        preparedStatement.setBoolean(6, comment.getApproved());
-        preparedStatement.execute();
-    }
-
     public List<User> getUsers(String command) throws SQLException {
         List<User> users = new ArrayList<>();
         result = statement.executeQuery(command);
@@ -98,18 +93,6 @@ public class DataBaseService {
                     Role.valueOf(result.getString("role"))));
         }
         return users;
-    }
-
-    public void addUser(User user) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
-        preparedStatement.setInt(1, user.getId());
-        preparedStatement.setString(2, user.getFirstName());
-        preparedStatement.setString(3, user.getLastName());
-        preparedStatement.setString(4, user.getPassword());
-        preparedStatement.setString(5, user.getEmail());
-        preparedStatement.setDate(6, user.getCreatedAt());
-        preparedStatement.setString(7, user.getRole().name());
-        preparedStatement.execute();
     }
 
     public List<GameObject> getGameObjects(String command) throws SQLException {
@@ -128,18 +111,6 @@ public class DataBaseService {
         return gameObjects;
     }
 
-    public void addGameObject(GameObject obj) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_GAMEOBJECT);
-        preparedStatement.setInt(1, obj.getId());
-        preparedStatement.setInt(2, obj.getGameId());
-        preparedStatement.setString(3, obj.getTitle());
-        preparedStatement.setString(4, obj.getText());
-        preparedStatement.setString(5, obj.getStatus().toString());
-        preparedStatement.setDate(6, obj.getCreatedAt());
-        preparedStatement.setDate(7, obj.getUpdatedAt());
-        preparedStatement.execute();
-    }
-
     public List<Game> getGames(String command) throws SQLException {
         List<Game> games = new ArrayList<>();
         result = statement.executeQuery(command);
@@ -151,10 +122,59 @@ public class DataBaseService {
         return games;
     }
 
+    public List<Post> getPosts(String command) throws SQLException {
+        List<Post> posts = new ArrayList<>();
+        result = statement.executeQuery(command);
+        while (result.next()) {
+            posts.add(
+                    new Post(result.getInt("id"),
+                            result.getInt("dealer_id")));
+        }
+        return posts;
+    }
+
+
+    public void addComment(Comment comment) throws SQLException {
+        preparedStatement = connection.prepareStatement(INSERT_NEW_COMMENT);
+        preparedStatement.setInt(1, comment.getAuthorId());
+        preparedStatement.setString(2, comment.getMessage());
+        preparedStatement.setInt(3, comment.getPostId());
+        preparedStatement.setDate(4, comment.getCreatedAt());
+        preparedStatement.setBoolean(5, comment.getApproved());
+        preparedStatement.execute();
+    }
+
+    public void addUser(User user) throws SQLException {
+        preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
+        preparedStatement.setString(1, user.getFirstName());
+        preparedStatement.setString(2, user.getLastName());
+        preparedStatement.setString(3, user.getPassword());
+        preparedStatement.setString(4, user.getEmail());
+        preparedStatement.setDate(5, user.getCreatedAt());
+        preparedStatement.setString(6, user.getRole().name());
+        preparedStatement.execute();
+    }
+
+    public void addGameObject(GameObject obj) throws SQLException {
+        preparedStatement = connection.prepareStatement(INSERT_NEW_GAMEOBJECT);
+        preparedStatement.setInt(1, obj.getGameId());
+        preparedStatement.setString(2, obj.getTitle());
+        preparedStatement.setString(3, obj.getText());
+        preparedStatement.setString(4, obj.getStatus().toString());
+        preparedStatement.setDate(5, obj.getCreatedAt());
+        preparedStatement.setDate(6, obj.getUpdatedAt());
+        preparedStatement.execute();
+    }
+
     public void addGame(Game game) throws SQLException {
         preparedStatement = connection.prepareStatement(INSERT_NEW_GAME);
-        preparedStatement.setInt(1, game.getId());
-        preparedStatement.setString(2, game.getName());
+        preparedStatement.setString(1, game.getName());
+        preparedStatement.execute();
+    }
+
+    public void addPost(Post post) throws SQLException {
+        preparedStatement = connection.prepareStatement(INSERT_NEW_POST);
+        preparedStatement.setInt(1, post.getDealer_id());
         preparedStatement.execute();
     }
 }
