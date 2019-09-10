@@ -1,16 +1,18 @@
-package com.company.services;
+package com.company.database;
 
-import com.company.modules.*;
+import com.company.entity.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class DataBaseService {
+public class DataBaseServiceImpl implements DataBaseService {
     private static final @Getter
     String DB_URL = "jdbc:mysql://localhost:3306/dealer_stat?useUnicode=true&serverTimezone=UTC";
     private static final @Getter
@@ -66,9 +68,10 @@ public class DataBaseService {
 
     ResultSet result = null;
 
-    public List<Comment> getComments(String command) throws SQLException {
+    @Override
+    public List<Comment> getComments(String SQLCommand) throws SQLException {
         List<Comment> comments = new ArrayList<>();
-        result = statement.executeQuery(command);
+        result = statement.executeQuery(SQLCommand);
         while (result.next()) {
             comments.add(new Comment(result.getInt("id"),
                     result.getString("message"),
@@ -80,9 +83,10 @@ public class DataBaseService {
         return comments;
     }
 
-    public List<User> getUsers(String command) throws SQLException {
+    @Override
+    public List<User> getUsers(String SQLCommand) throws SQLException {
         List<User> users = new ArrayList<>();
-        result = statement.executeQuery(command);
+        result = statement.executeQuery(SQLCommand);
         while (result.next()) {
             users.add(new User(result.getInt("id"),
                     result.getString("first_name"),
@@ -95,9 +99,10 @@ public class DataBaseService {
         return users;
     }
 
-    public List<GameObject> getGameObjects(String command) throws SQLException {
+    @Override
+    public List<GameObject> getGameObjects(String SQLCommand) throws SQLException {
         List<GameObject> gameObjects = new ArrayList<>();
-        result = statement.executeQuery(command);
+        result = statement.executeQuery(SQLCommand);
         while (result.next()) {
             gameObjects.add(
                     new GameObject(result.getInt("id"),
@@ -111,9 +116,10 @@ public class DataBaseService {
         return gameObjects;
     }
 
-    public List<Game> getGames(String command) throws SQLException {
+    @Override
+    public List<Game> getGames(String SQLCommand) throws SQLException {
         List<Game> games = new ArrayList<>();
-        result = statement.executeQuery(command);
+        result = statement.executeQuery(SQLCommand);
         while (result.next()) {
             games.add(
                     new Game(result.getInt("id"),
@@ -122,9 +128,10 @@ public class DataBaseService {
         return games;
     }
 
-    public List<Post> getPosts(String command) throws SQLException {
+    @Override
+    public List<Post> getPosts(String SQLCommand) throws SQLException {
         List<Post> posts = new ArrayList<>();
-        result = statement.executeQuery(command);
+        result = statement.executeQuery(SQLCommand);
         while (result.next()) {
             posts.add(
                     new Post(result.getInt("id"),
@@ -133,7 +140,7 @@ public class DataBaseService {
         return posts;
     }
 
-
+    @Override
     public void addComment(Comment comment) throws SQLException {
         preparedStatement = connection.prepareStatement(INSERT_NEW_COMMENT);
         preparedStatement.setInt(1, comment.getAuthorId());
@@ -144,6 +151,7 @@ public class DataBaseService {
         preparedStatement.execute();
     }
 
+    @Override
     public void addUser(User user) throws SQLException {
         preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
         preparedStatement.setString(1, user.getFirstName());
@@ -155,6 +163,7 @@ public class DataBaseService {
         preparedStatement.execute();
     }
 
+    @Override
     public void addGameObject(GameObject obj) throws SQLException {
         preparedStatement = connection.prepareStatement(INSERT_NEW_GAMEOBJECT);
         preparedStatement.setInt(1, obj.getGameId());
@@ -166,12 +175,14 @@ public class DataBaseService {
         preparedStatement.execute();
     }
 
+    @Override
     public void addGame(Game game) throws SQLException {
         preparedStatement = connection.prepareStatement(INSERT_NEW_GAME);
         preparedStatement.setString(1, game.getName());
         preparedStatement.execute();
     }
 
+    @Override
     public void addPost(Post post) throws SQLException {
         preparedStatement = connection.prepareStatement(INSERT_NEW_POST);
         preparedStatement.setInt(1, post.getDealer_id());

@@ -1,15 +1,13 @@
-import com.company.modules.Role;
-import com.company.modules.User;
-import com.company.services.DataBaseService;
+import com.company.entity.Role;
+import com.company.entity.User;
+import com.company.database.DataBaseServiceImpl;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class test {
     public static void main(String[] args) throws SQLException {
-        DataBaseService service = new DataBaseService();
+        DataBaseServiceImpl service = new DataBaseServiceImpl();
         java.util.Date now = new java.util.Date();
         java.sql.Date date = new java.sql.Date(now.getTime());
         User user = new User();
@@ -21,7 +19,7 @@ public class test {
         user.setLastName("Sho");
         user.setPassword("12345");
         service.addUser(user);
-        List<User> users=service.getUsers(DataBaseService.SELECT_USER_WITH_ID+7);
+        List<User> users =service.getUsers(DataBaseServiceImpl.SELECT_USER_WITH_ID+7);
         System.out.println(users);
     }
 }
