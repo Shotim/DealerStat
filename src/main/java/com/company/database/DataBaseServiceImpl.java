@@ -1,24 +1,20 @@
 package com.company.database;
 
 import com.company.entity.*;
+import com.company.mapper.*;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
-@Service
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@Repository
 public class DataBaseServiceImpl implements DataBaseService {
-    private static final @Getter
-    String DB_URL = "jdbc:mysql://localhost:3306/dealer_stat?useUnicode=true&serverTimezone=UTC";
-    private static final @Getter
-    String PASSWORD = "root";
-    private static final @Getter
-    String USER = "root";
+
     private static final String INSERT_NEW_COMMENT = "INSERT INTO comments (author_id,message,post_id,created_at,approved) VALUES(?,?,?,?,?) ";
     private static final String INSERT_NEW_USER = "INSERT INTO users (first_name, last_name, password, email, created_at, role)VALUES (?,?,?,?,?,?)";
     private static final String INSERT_NEW_GAMEOBJECT = "INSERT INTO gameobjects (game_id, title, text, status, created_at, updated_at) VALUES (?,?,?,?,?,?)";
@@ -40,152 +36,52 @@ public class DataBaseServiceImpl implements DataBaseService {
     public static final String SELECT_ALL_POSTS_WITH_DEALER_ID = "SELECT * FROM posts WHERE dealer_id=";
 
 
-    PreparedStatement preparedStatement = null;
+    public final JdbcTemplate jdbcTemplate;
 
-    Connection connection;
-
-    {
-        try {
-            Driver driver = new com.mysql.cj.jdbc.Driver();
-            DriverManager.registerDriver(driver);
-            connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    @Autowired
+    public DataBaseServiceImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
-
-    Statement statement;
-
-    {
-        try {
-            if (this.connection != null) {
-                statement = this.connection.createStatement();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    ResultSet result = null;
 
     @Override
     public List<Comment> getComments(String SQLCommand) throws SQLException {
-        List<Comment> comments = new ArrayList<>();
-        result = statement.executeQuery(SQLCommand);
-        while (result.next()) {
-            comments.add(new Comment(result.getInt("id"),
-                    result.getString("message"),
-                    result.getInt("post_id"),
-                    result.getInt("author_id"),
-                    result.getDate("created_at"),
-                    result.getBoolean("approved")));
-        }
-        return comments;
+        return jdbcTemplate.query(SQLCommand, new CommentMapper());
     }
-
     @Override
     public List<User> getUsers(String SQLCommand) throws SQLException {
-        List<User> users = new ArrayList<>();
-        result = statement.executeQuery(SQLCommand);
-        while (result.next()) {
-            users.add(new User(result.getInt("id"),
-                    result.getString("first_name"),
-                    result.getString("last_name"),
-                    result.getString("password"),
-                    result.getString("email"),
-                    result.getDate("created_at"),
-                    Role.valueOf(result.getString("role"))));
-        }
-        return users;
+        return jdbcTemplate.query(SQLCommand, new UserMapper());
     }
-
     @Override
     public List<GameObject> getGameObjects(String SQLCommand) throws SQLException {
-        List<GameObject> gameObjects = new ArrayList<>();
-        result = statement.executeQuery(SQLCommand);
-        while (result.next()) {
-            gameObjects.add(
-                    new GameObject(result.getInt("id"),
-                            result.getString("title"),
-                            result.getString("text"),
-                            GameObjectStatus.valueOf(result.getString("status")),
-                            result.getDate("created_at"),
-                            result.getDate("updated_at"),
-                            result.getInt("game_id")));
-        }
-        return gameObjects;
+        return jdbcTemplate.query(SQLCommand, new GameObjectMapper());
     }
-
     @Override
     public List<Game> getGames(String SQLCommand) throws SQLException {
-        List<Game> games = new ArrayList<>();
-        result = statement.executeQuery(SQLCommand);
-        while (result.next()) {
-            games.add(
-                    new Game(result.getInt("id"),
-                            result.getString("name")));
-        }
-        return games;
+        return jdbcTemplate.query(SQLCommand, new GameMapper());
     }
-
     @Override
     public List<Post> getPosts(String SQLCommand) throws SQLException {
-        List<Post> posts = new ArrayList<>();
-        result = statement.executeQuery(SQLCommand);
-        while (result.next()) {
-            posts.add(
-                    new Post(result.getInt("id"),
-                            result.getInt("dealer_id")));
-        }
-        return posts;
+        return jdbcTemplate.query(SQLCommand, new PostMapper());
     }
 
     @Override
     public void addComment(Comment comment) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_COMMENT);
-        preparedStatement.setInt(1, comment.getAuthorId());
-        preparedStatement.setString(2, comment.getMessage());
-        preparedStatement.setInt(3, comment.getPostId());
-        preparedStatement.setDate(4, comment.getCreatedAt());
-        preparedStatement.setBoolean(5, comment.getApproved());
-        preparedStatement.execute();
+       jdbcTemplate.update(INSERT_NEW_COMMENT,comment.getAuthorId(),comment.getMessage(),comment.getPostId(),comment.getCreatedAt(),comment.getApproved());
     }
-
     @Override
     public void addUser(User user) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
-        preparedStatement.setString(1, user.getFirstName());
-        preparedStatement.setString(2, user.getLastName());
-        preparedStatement.setString(3, user.getPassword());
-        preparedStatement.setString(4, user.getEmail());
-        preparedStatement.setDate(5, user.getCreatedAt());
-        preparedStatement.setString(6, user.getRole().name());
-        preparedStatement.execute();
+        jdbcTemplate.update(INSERT_NEW_USER,user.getFirstName(),user.getLastName(),user.getPassword(),user.getEmail(),user.getCreatedAt(),user.getRole());
     }
-
     @Override
     public void addGameObject(GameObject obj) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_GAMEOBJECT);
-        preparedStatement.setInt(1, obj.getGameId());
-        preparedStatement.setString(2, obj.getTitle());
-        preparedStatement.setString(3, obj.getText());
-        preparedStatement.setString(4, obj.getStatus().toString());
-        preparedStatement.setDate(5, obj.getCreatedAt());
-        preparedStatement.setDate(6, obj.getUpdatedAt());
-        preparedStatement.execute();
+        jdbcTemplate.update(INSERT_NEW_GAMEOBJECT,obj.getGameId(),obj.getTitle(),obj.getText(),obj.getStatus(),obj.getCreatedAt(),obj.getUpdatedAt());
     }
-
     @Override
     public void addGame(Game game) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_GAME);
-        preparedStatement.setString(1, game.getName());
-        preparedStatement.execute();
+        jdbcTemplate.update(INSERT_NEW_GAME,game.getName());
     }
-
     @Override
     public void addPost(Post post) throws SQLException {
-        preparedStatement = connection.prepareStatement(INSERT_NEW_POST);
-        preparedStatement.setInt(1, post.getDealer_id());
-        preparedStatement.execute();
+        jdbcTemplate.update(INSERT_NEW_POST,post.getDealer_id());
     }
 }
