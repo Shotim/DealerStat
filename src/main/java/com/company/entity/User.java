@@ -15,6 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+    public static final int DEFAULT_ID = 0;
     Integer id;
     String firstName;
     String lastName;

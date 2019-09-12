@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class Game {
+    public static final int DEFAULT_ID = 0;
     Integer id;
     String name;
 }

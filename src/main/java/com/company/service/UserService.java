@@ -6,23 +6,23 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
-    public List<Comment> findComments(String SQLCommand) throws SQLException;
+    public List<Comment> findComments(String SQLCommand);
 
-    public List<GameObject> findGameObjects(String SQLCommand) throws SQLException;
+    public List<GameObject> findGameObjects(String SQLCommand);
 
-    public List<Game> findGames(String SQLCommand) throws SQLException;
+    public List<Game> findGames(String SQLCommand);
 
-    public List<Post> findPosts(String SQLCommand) throws SQLException;
+    public List<Post> findPosts(String SQLCommand);
 
-    public List<User> findUsers(String SQLCommand) throws SQLException;
+    public List<User> findUsers(String SQLCommand);
 
-    public void addComment(Comment comment) throws SQLException;
+    public void addComment(Comment comment);
 
-    public void addGameObject(GameObject gameObject) throws SQLException;
+    public void addGameObject(GameObject gameObject);
 
-    public void addGame(Game game) throws SQLException;
+    public void addGame(Game game);
 
-    public void addPost(Post post) throws SQLException;
+    public void addPost(Post post);
 
-    public void addUser(User user) throws SQLException;
+    public void addUser(User user);
 }

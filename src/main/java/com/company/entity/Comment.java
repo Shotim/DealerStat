@@ -13,6 +13,7 @@ import java.sql.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class Comment {
+    public static final int DEFAULT_ID = 0;
     Integer id;
     String message;
     Integer postId;

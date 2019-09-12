@@ -13,6 +13,7 @@ import java.sql.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class GameObject {
+    public static final int DEFAULT_ID = 0;
     Integer id;
     String title;
     String text;
