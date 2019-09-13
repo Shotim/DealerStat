@@ -7,7 +7,7 @@
 <body>
 <h1>Add user</h1>
 <h2>
-    <form name="dealer" action="/adddealer" method="post">
+    <form name="dealer" action="/newDealer" method="post">
         First name
         <input title="First name" type="text" name="firstName">
         <br>

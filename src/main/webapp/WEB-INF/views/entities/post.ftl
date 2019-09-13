@@ -31,7 +31,7 @@
         <#list gameobjects as object>
             <tr>
                 <td>
-                    <a href="/gameobject/#{object.id}">#{object.id}</a>
+                    <a href="/gameObject/#{object.id}">#{object.id}</a>
                 </td>
                 <td>${object.gameId}</td>
                 <td>${object.title}</td>
@@ -43,7 +43,7 @@
         </#list>
     </table>
     <br>
-    <a href="/post/${post[0].id}/addgameobjects">Add gameobject</a>
+    <a href="/post/${post[0].id}/newGameObjects">Add game object</a>
     <br>
     <a href="../../"><-BACK</a>
 </h2>

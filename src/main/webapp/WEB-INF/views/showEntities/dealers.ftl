@@ -32,7 +32,7 @@
         </#list>
     </table>
     <br>
-    <a href="/adddealer">Add new user</a>
+    <a href="/newDealer">Add new user</a>
     <br>
     <a href="../.."><-BACK</a>
 </h2>

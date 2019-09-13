@@ -38,7 +38,7 @@
         </#list>
     </table>
     <br>
-    <a href="/adddealer${dealer[0].id}post/">Add post</a>
+    <a href="/newDealer${dealer[0].id}post/">Add post</a>
     <br>
     <br>
     <a href="../"><-BACK</a>

@@ -18,7 +18,7 @@
             <th>Updated at</th>
         </tr>
         <tr>
-            <td>${gameobject[0].id}"</td>
+            <td>${gameobject[0].id}</td>
             <td>${gameobject[0].gameId}</td>
             <td>${gameobject[0].title}</td>
             <td>${gameobject[0].text}</td>

@@ -22,37 +22,31 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/showgameobjects")
-    public String showGameObjects(Model model) {
+    @GetMapping("/gameObjects")
+    public String gameObjects(Model model) {
         model.addAttribute("gameobjects",
                 userService.findGameObjects(
                         DataBaseServiceImpl.SELECT_ALL_GAMEOBJECTS));
-        return "showgameobjects";
+        return "gameObjects";
     }
 
-    @GetMapping("/gameobject/{id}")
-    public String showGameObject(@PathVariable("id") String id, Model model) {
+    @GetMapping("/gameObject/{id}")
+    public String gameObject(@PathVariable("id") String id, Model model) {
         model.addAttribute("gameobject",
                 userService.findGameObjects(
                         DataBaseServiceImpl.SELECT_GAMEOBJECT_WITH_ID + id));
-        return "gameobject";
+        return "gameObject";
     }
 
-    @PostMapping("/addgameobject")
-    public String addGameObject(@ModelAttribute("gameobject") GameObject gameObject) {
-        userService.addGameObject(gameObject);
-        return "redirect:../";
-    }
-
-    @GetMapping("/showgames")
-    public String showGames(Model model) {
+    @GetMapping("/games")
+    public String games(Model model) {
         model.addAttribute("games",
                 userService.findGames(DataBaseServiceImpl.SELECT_ALL_GAMES));
-        return "showgames";
+        return "games";
     }
 
     @GetMapping("/game/{id}")
-    public String showGame(@PathVariable("id") String id, Model model) {
+    public String game(@PathVariable("id") String id, Model model) {
         model.addAttribute("game",
                 userService.findGames(
                         DataBaseServiceImpl.SELECT_GAME_WITH_ID + id));
@@ -62,21 +56,15 @@ public class UserController {
         return "game";
     }
 
-    @PostMapping("/addgame")
-    public String addGame(@ModelAttribute("game") Game game) {
-        userService.addGame(game);
-        return "redirect:../";
-    }
-
-    @GetMapping("/showposts")
-    public String showPosts(Model model) {
+    @GetMapping("/posts")
+    public String posts(Model model) {
         model.addAttribute("posts",
                 userService.findPosts(DataBaseServiceImpl.SELECT_ALL_POSTS));
-        return "showposts";
+        return "posts";
     }
 
     @GetMapping("/post/{id}")
-    public String showPost(@PathVariable("id") String id, Model model) {
+    public String post(@PathVariable("id") String id, Model model) {
         model.addAttribute("post",
                 userService.findPosts(
                         DataBaseServiceImpl.SELECT_POST_WITH_ID + id));
@@ -86,24 +74,24 @@ public class UserController {
         return "post";
     }
 
-    @GetMapping("/post/{id}/addgameobjects")
-    public String addGameObjectToPost(@PathVariable("id") int id, Model model) {
+    @GetMapping("/post/{id}/newGameObjects")
+    public String gameObjectToPost(@PathVariable("id") int id, Model model) {
         model.addAttribute("games",
                 userService.findGames(
                         DataBaseServiceImpl.SELECT_ALL_GAMES));
         model.addAttribute("id", id);
-        return "addgameobjects";
+        return "newGameObjects";
     }
 
-    @GetMapping("/showdealers")
-    public String showDealers(Model model) {
+    @GetMapping("/dealers")
+    public String dealers(Model model) {
         model.addAttribute("users",
                 userService.findUsers(DataBaseServiceImpl.SELECT_ALL_USERS));
-        return "showdealers";
+        return "dealers";
     }
 
     @GetMapping("/dealer/{id}")
-    public String showDealer(@PathVariable("id") String id, Model model) {
+    public String dealer(@PathVariable("id") String id, Model model) {
         model.addAttribute("dealer",
                 userService.findUsers(DataBaseServiceImpl.SELECT_USER_WITH_ID + id));
         model.addAttribute("posts",
@@ -111,36 +99,30 @@ public class UserController {
         return "dealer";
     }
 
-    @GetMapping("/adddealer")
-    public String addDealerPage() {
-        return "adddealer";
+    @GetMapping("/newDealer")
+    public String newDealerPage() {
+        return "newDealer";
     }
 
-    @PostMapping("/adddealer")
-    public String addDealer(@ModelAttribute("dealer") User dealer) {
+    @PostMapping("/newDealer")
+    public String newDealer(@ModelAttribute("dealer") User dealer) {
         dealer.setRole(Role.DEALER);
         dealer.setCreatedAt(new Date(new java.util.Date().getTime()));
         dealer.setId(User.DEFAULT_ID);
         userService.addUser(dealer);
-        return "redirect:/showdealers";
+        return "redirect:/dealers";
     }
 
     @GetMapping("/comment/{id}")
-    public String showComment(@PathVariable("id") String id, Model model) {
+    public String comment(@PathVariable("id") String id, Model model) {
         model.addAttribute("comment",
                 userService.findComments(
                         DataBaseServiceImpl.SELECT_COMMENT_WITH_ID + id));
         return "comment";
     }
 
-    @PostMapping("/addcomment")
-    public String addComment(@ModelAttribute("comment") Comment comment) {
-        userService.addComment(comment);
-        return "redirect:../";
-    }
-
-    @GetMapping("/post/{postId}/addgameobjects/showgame/{gameId}")
-    public String showGameForCreatePost(
+    @GetMapping("/post/{postId}/newGameObjects/game/{gameId}")
+    public String gameForCreatePost(
             @PathVariable("gameId") String gameId, Model model,
             @PathVariable("postId") String postId) {
         model.addAttribute("game",
@@ -149,29 +131,30 @@ public class UserController {
         model.addAttribute("gameobjects",
                 userService.findGameObjects(
                         DataBaseServiceImpl.SELECT_ALL_GAMEOBJECTS_WITH_GAME_ID + gameId));
-        return "gamefrompost";
+        return "gameFromPost";
     }
 
-    @GetMapping("/post/{id}/addgameobjects/addnewgame")
-    public String addNewGamePage() {
-        return "addnewgame";
+    @GetMapping("/post/{id}/newGameObjects/newGame")
+    public String newGamePage(@PathVariable("id") String id) {
+        return "newGame";
     }
 
-    @PostMapping("/post/{id}/addgameobjects/addnewgame")
-    public String addNewGame(@PathVariable("id") String id,
+    @PostMapping("/post/{id}/newGameObjects/newGame")
+    public String newGame(@PathVariable("id") String id,
                              @ModelAttribute("game") Game game) {
         game.setId(Game.DEFAULT_ID);
         userService.addGame(game);
-        return "redirect:/post/" + id + "/addgameobjects";
+        return "redirect:/post/" + id + "/newGameObjects";
     }
 
-    @GetMapping("/post/{postId}/addgameobjects/showgame/{gameId}/addnewgameobject")
-    public String addNewGameObjectPage() {
-        return "addnewgameobject";
+    @GetMapping("/post/{postId}/newGameObjects/game/{gameId}/newGameObject")
+    public String newGameObjectPage(@PathVariable("postId") String postId,
+                                    @PathVariable("gameId") String gameId) {
+        return "newGameObject";
     }
 
-    @PostMapping("/post/{postId}/addgameobjects/showgame/{gameId}/addnewgameobject")
-    public String addNewGameObject(@PathVariable("postId") String postId,
+    @PostMapping("/post/{postId}/newGameObjects/game/{gameId}/newGameObject")
+    public String newGameObject(@PathVariable("postId") String postId,
                                    @PathVariable("gameId") String gameId,
                                    @ModelAttribute("gameobject") GameObject object) {
         object.setGameId(Integer.parseInt(gameId));
@@ -180,31 +163,31 @@ public class UserController {
         object.setCreatedAt(new Date(new java.util.Date().getTime()));
         object.setUpdatedAt(object.getCreatedAt());
         userService.addGameObject(object);
-        return "redirect:/post/" + postId + "/addgameobjects/showgame/" + gameId;
+        return "redirect:/post/" + postId + "/newGameObjects/game/" + gameId;
     }
 
-    @GetMapping("/post/{postId}/addgameobjects/showgame/{gameId}/addgameobject/{objectId}")
-    public String addGameObjectToPostPage(@PathVariable("postId") String postId,
+    @GetMapping("/post/{postId}/newGameObjects/game/{gameId}/newGameObject/{objectId}")
+    public String newGameObjectToPostPage(@PathVariable("postId") String postId,
                                           @PathVariable("objectId") String objectId,
                                           @PathVariable("gameId") String gameId) {
         userService.addGameObjectToPost(Integer.parseInt(objectId), Integer.parseInt(postId));
-        return "addgameobjecttopost";
+        return "newGameObjectInpost";
     }
 
-    @PostMapping("/post/{postId}/addgameobjects/showgame/{gameId}/addgameobject/{objectId}")
-    public String addGameObjectToPost(@PathVariable("postId") String postId,
+    @PostMapping("/post/{postId}/newGameObjects/game/{gameId}/newGameObject/{objectId}")
+    public String gameObjectToPost(@PathVariable("postId") String postId,
                                       @PathVariable("objectId") String objectId) {
         return "redirect:/post/{postId}";
     }
 
-    @GetMapping("/adddealer{id}post")
-    public String addPostPage(@PathVariable("id") String id) {
+    @GetMapping("/newDealer{id}post")
+    public String newPostPage(@PathVariable("id") String id) {
         userService.addPost(new Post(Post.DEFAULT_ID, Integer.parseInt(id)));
-        return "addpost";
+        return "newPost";
     }
 
-    @PostMapping("/adddealer{id}post")
-    public String addPost() {
+    @PostMapping("/newDealer{id}post")
+    public String newPost() {
         return "redirect:/dealer/{id}";
     }
 }

@@ -7,7 +7,7 @@
 <body>
 <h1>Game object was added!</h1>
 <h2>
-    <form name="submittion" action="/post/${postId}/addgameobjects/showgame/${gameId}/addgameobject/${objectId}" method="post">
+    <form name="submittion" action="/post/${postId}/newGameObjects/game/${gameId}/newGameObject/${objectId}" method="post">
         <input type="submit" value="Ok">
     </form>
 </h2>

@@ -3,13 +3,13 @@
 <h1>Hello World!</h1>
 <br>
 <h2>
-<a href="/showdealers">Show dealers</a>
+<a href="/dealers">Show dealers</a>
 <br>
-<a href="/showposts">Show posts</a>
+<a href="/posts">Show posts</a>
 <br>
-<a href="/showgames">Show games</a>
+<a href="/games">Show games</a>
 <br>
-<a href="/showgameobjects">Show gameobjects</a>
+<a href="/gameObjects">Show game objects</a>
 </h2>
 </body>
 </html>

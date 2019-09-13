@@ -7,7 +7,7 @@
 <body>
 <h1>New game object</h1>
 <h2>
-    <form name="game" action="/post/${id}/addgameobjects/addnewgame" method="post">
+    <form name="game" action="/post/${id}/newGameObjects/newGame" method="post">
         Name
         <input title="Name" type="text" name="name">
         <br>

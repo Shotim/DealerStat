@@ -8,7 +8,7 @@
 <h1>Post creation complete</h1>
 <h2>
     <br>
-    <form name="submittion" action="/adddealer${id}post" method="post">
+    <form name="submittion" action="/newDealer${id}post" method="post">
         <input type="submit" value="OK">
     </form>
 </h2>
