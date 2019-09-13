@@ -5,11 +5,13 @@
     <title>Comment</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-    </tr>
+<h1>Comment</h1>
+<h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
         <tr>
             <td>${comment[0].id}"</td>
             <td>${comment[0].authorId}</td>
@@ -18,8 +20,9 @@
             <td>${comment[0].createdAt}</td>
             <td>${comment[0].approved}</td>
         </tr>
-</table>
-<br>
-<a href="../"><-BACK</a>
+    </table>
+    <br>
+    <a href="../"><-BACK</a>
+</h2>
 </body>
 </html>

@@ -6,25 +6,27 @@
 </head>
 <body>
 <h1>Games list</h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-    </tr>
-    <#list games as game>
+<h2>
+    <table>
         <tr>
-            <td>
-                <a href="/game/${game.id}">${game.id}</a>
-            </td>
-            <td>${game.name}</td>
-            <#--            <td><a href="/delete/${user.id}">Delete</a></td>-->
-            <#--            <td><a href="/update/${user.id}">Update</a></td>-->
+            <th>ID</th>
+            <th>Name</th>
         </tr>
-    </#list>
-</table>
-<br>
-<a href="/addGame">Add new game</a>
-<br>
-<a href="../.."><-BACK</a>
+        <#list games as game>
+            <tr>
+                <td>
+                    <a href="/game/${game.id}">${game.id}</a>
+                </td>
+                <td>${game.name}</td>
+                <#--            <td><a href="/delete/${user.id}">Delete</a></td>-->
+                <#--            <td><a href="/update/${user.id}">Update</a></td>-->
+            </tr>
+        </#list>
+    </table>
+    <br>
+    <a href="/addGame">Add new game</a>
+    <br>
+    <a href="../.."><-BACK</a>
+</h2>
 </body>
 </html>

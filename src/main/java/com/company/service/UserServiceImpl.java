@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) {
         dataBaseService.addUser(user);
     }
+
+    @Override
+    public void addGameObjectToPost(int gameObjectId, int postId) {
+        dataBaseService.addGameObjectToPost(gameObjectId, postId);
+    }
 }

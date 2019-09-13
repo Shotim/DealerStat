@@ -6,9 +6,11 @@
 </head>
 <body>
 <h1>Post creation complete</h1>
-<br>
-<form name="submittion" action="/adddealer${id}post" method="post">
-    <input type="submit" value="OK">
-</form>
+<h2>
+    <br>
+    <form name="submittion" action="/adddealer${id}post" method="post">
+        <input type="submit" value="OK">
+    </form>
+</h2>
 </body>
 </html>

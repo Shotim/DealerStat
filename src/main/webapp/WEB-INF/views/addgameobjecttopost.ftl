@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add game object to post</title>
 </head>
 <body>
-<h1>add gameobjects</h1>
+<h1>Game object was added!</h1>
+<h2>
+    <form name="submittion" action="/post/${postId}/addgameobjects/showgame/${gameId}/addgameobject/${objectId}" method="post">
+        <input type="submit" value="Ok">
+    </form>
+</h2>
 </body>
 </html>

@@ -17,6 +17,7 @@ public class DataBaseServiceImpl implements DataBaseService {
     private static final String INSERT_NEW_GAMEOBJECT = "INSERT INTO gameobjects (game_id, title, text, status, created_at, updated_at) VALUES (?,?,?,?,?,?)";
     private static final String INSERT_NEW_GAME = "INSERT INTO games (name)VALUES (?)";
     private static final String INSERT_NEW_POST = "INSERT INTO posts (dealer_id) VALUES(?)";
+    private static final String INSERT_GAMEOBJECT_TO_POST = "INSERT INTO post_gameobjects (post_id, gameobject_id) VALUES (?,?)";
 
     public static final String SELECT_ALL_USERS = "SELECT * FROM users";
     public static final String SELECT_ALL_GAMEOBJECTS = "SELECT * FROM gameobjects";
@@ -73,7 +74,7 @@ public class DataBaseServiceImpl implements DataBaseService {
 
     @Override
     public void addGameObject(GameObject obj) {
-        jdbcTemplate.update(INSERT_NEW_GAMEOBJECT, obj.getGameId(), obj.getTitle(), obj.getText(), obj.getStatus(), obj.getCreatedAt(), obj.getUpdatedAt());
+        jdbcTemplate.update(INSERT_NEW_GAMEOBJECT, obj.getGameId(), obj.getTitle(), obj.getText(), obj.getStatus().toString(), obj.getCreatedAt(), obj.getUpdatedAt());
     }
 
     @Override
@@ -84,5 +85,10 @@ public class DataBaseServiceImpl implements DataBaseService {
     @Override
     public void addPost(Post post) {
         jdbcTemplate.update(INSERT_NEW_POST, post.getDealerId());
+    }
+
+    @Override
+    public void addGameObjectToPost(int gameObjectId, int postId) {
+        jdbcTemplate.update(INSERT_GAMEOBJECT_TO_POST, postId, gameObjectId);
     }
 }

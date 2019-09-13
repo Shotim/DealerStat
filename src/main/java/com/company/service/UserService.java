@@ -25,4 +25,6 @@ public interface UserService {
     public void addPost(Post post);
 
     public void addUser(User user);
+
+    public void addGameObjectToPost(int gameObjectId, int postId);
 }

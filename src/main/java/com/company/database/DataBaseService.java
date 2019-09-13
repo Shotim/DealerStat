@@ -2,7 +2,6 @@ package com.company.database;
 
 import com.company.entity.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface DataBaseService {
@@ -25,4 +24,6 @@ public interface DataBaseService {
     public void addPost(Post post);
 
     public void addUser(User user);
+
+    public void addGameObjectToPost(int gameObjectId, int postId);
 }

@@ -6,6 +6,6 @@
 </head>
 <body>
 <h1>dealer home page</h1>
-<a href="../">previous</a>
+<a href="../"><-BACK</a>
 </body>
 </html>
