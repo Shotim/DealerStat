@@ -2,29 +2,43 @@ package com.company.service;
 
 import com.company.entity.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
-    public List<Comment> findComments(String SQLCommand);
 
-    public List<GameObject> findGameObjects(String SQLCommand);
+    List<Comment> findCommentsFromPost(int postId);
 
-    public List<Game> findGames(String SQLCommand);
+    List<User> findAllUsers();
 
-    public List<Post> findPosts(String SQLCommand);
+    User findUser(int userId);
 
-    public List<User> findUsers(String SQLCommand);
+    List<GameObject> findAllGameObjects();
 
-    public void addComment(Comment comment);
+    List<GameObject> findGameObjectsFromPost(int postId);
 
-    public void addGameObject(GameObject gameObject);
+    List<GameObject> findGameObjectsOfGame(int gameId);
 
-    public void addGame(Game game);
+    GameObject findGameObject(int objectId);
 
-    public void addPost(Post post);
+    List<Game> findAllGames();
 
-    public void addUser(User user);
+    Game findGame(int gameId);
 
-    public void addGameObjectToPost(int gameObjectId, int postId);
+    List<Post> findAllPosts();
+
+    List<Post> findPostsOfDealer(int dealerId);
+
+    Post findPost(int postId);
+
+    void addComment(Comment comment);
+
+    void addGameObject(GameObject gameObject);
+
+    void addGame(Game game);
+
+    void addPost(Post post);
+
+    void addUser(User user);
+
+    void addGameObjectToPost(int gameObjectId, int postId);
 }

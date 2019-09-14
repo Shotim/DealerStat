@@ -21,7 +21,7 @@
         <#list gameobjects as object>
             <tr>
                 <td>
-                    <a href="/user/${object.id}">${object.id}</a>
+                    <a href="/gameObject/${object.id}">${object.id}</a>
                 </td>
                 <td>
                     <a href="/game/${object.gameId}">${object.gameId}</a>

@@ -17,12 +17,12 @@
             <th>Role</th>
         </tr>
         <tr>
-            <td>${dealer[0].id}</td>
-            <td>${dealer[0].firstName}</td>
-            <td>${dealer[0].lastName}</td>
-            <td>${dealer[0].email}</td>
-            <td>${dealer[0].createdAt}</td>
-            <td>${dealer[0].role}</td>
+            <td>${dealer.id}</td>
+            <td>${dealer.firstName}</td>
+            <td>${dealer.lastName}</td>
+            <td>${dealer.email}</td>
+            <td>${dealer.createdAt}</td>
+            <td>${dealer.role}</td>
         </tr>
     </table>
     <br>
@@ -38,7 +38,7 @@
         </#list>
     </table>
     <br>
-    <a href="/newDealer${dealer[0].id}post/">Add post</a>
+    <a href="/newDealer${dealer.id}post/">Add post</a>
     <br>
     <br>
     <a href="../"><-BACK</a>

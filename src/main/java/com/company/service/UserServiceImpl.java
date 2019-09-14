@@ -13,29 +13,65 @@ public class UserServiceImpl implements UserService {
 
     public DataBaseService dataBaseService;
 
+
     @Override
-    public List<Comment> findComments(String SQLCommand) {
-        return dataBaseService.getComments(SQLCommand);
+    public List<Comment> findCommentsFromPost(int postId) {
+        return dataBaseService.getCommentsFromPost(postId);
     }
 
     @Override
-    public List<GameObject> findGameObjects(String SQLCommand) {
-        return dataBaseService.getGameObjects(SQLCommand);
+    public List<User> findAllUsers() {
+        return dataBaseService.getAllUsers();
     }
 
     @Override
-    public List<Game> findGames(String SQLCommand) {
-        return dataBaseService.getGames(SQLCommand);
+    public User findUser(int userId) {
+        return dataBaseService.getUser(userId);
     }
 
     @Override
-    public List<Post> findPosts(String SQLCommand) {
-        return dataBaseService.getPosts(SQLCommand);
+    public List<GameObject> findAllGameObjects() {
+        return dataBaseService.getAllGameObjects();
     }
 
     @Override
-    public List<User> findUsers(String SQLCommand) {
-        return dataBaseService.getUsers(SQLCommand);
+    public List<GameObject> findGameObjectsFromPost(int postId) {
+        return dataBaseService.getGameObjectsFromPost(postId);
+    }
+
+    @Override
+    public List<GameObject> findGameObjectsOfGame(int gameId) {
+        return dataBaseService.getGameObjectsOfGame(gameId);
+    }
+
+    @Override
+    public GameObject findGameObject(int objectId) {
+        return dataBaseService.getGameObject(objectId);
+    }
+
+    @Override
+    public List<Game> findAllGames() {
+        return dataBaseService.getAllGames();
+    }
+
+    @Override
+    public Game findGame(int gameId) {
+        return dataBaseService.getGame(gameId);
+    }
+
+    @Override
+    public List<Post> findAllPosts() {
+        return dataBaseService.getAllPosts();
+    }
+
+    @Override
+    public List<Post> findPostsOfDealer(int dealerId) {
+        return dataBaseService.getPostsOfDealer(dealerId);
+    }
+
+    @Override
+    public Post findPost(int postId) {
+        return dataBaseService.getPost(postId);
     }
 
     @Override

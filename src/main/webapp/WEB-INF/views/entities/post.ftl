@@ -13,11 +13,12 @@
             <th>Dealer id</th>
         </tr>
         <tr>
-            <td>${post[0].id}</td>
-            <td>${post[0].dealerId}</td>
+            <td>${post.id}</td>
+            <td>${post.dealerId}</td>
         </tr>
     </table>
     <br>
+    Game objects list
     <table>
         <tr>
             <th>ID</th>
@@ -43,7 +44,29 @@
         </#list>
     </table>
     <br>
-    <a href="/post/${post[0].id}/newGameObjects">Add game object</a>
+    <a href="/post/${post.id}/newComment"> Add comment</a>
+    <br>
+    Comments
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Author id</th>
+            <th>Message</th>
+            <th>Created at</th>
+            <th>approved</th>
+        </tr>
+        <#list comments as comment>
+            <tr>
+                <td>${comment.id}</td>
+                <td>${comment.authorId}</td>
+                <td>${comment.message}</td>
+                <td>${comment.createdAt}</td>
+                <td>${comment.approved?string('approved','not approved')}</td>
+            </tr>
+        </#list>
+    </table>
+    <br>
+    <a href="/post/${post.id}/newGameObjects">Add game object</a>
     <br>
     <a href="../../"><-BACK</a>
 </h2>

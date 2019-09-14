@@ -5,25 +5,40 @@ import com.company.entity.*;
 import java.util.List;
 
 public interface DataBaseService {
-    public List<Comment> getComments(String SQLCommand);
+    List<Comment> getCommentsFromPost(int postId);
 
-    public List<GameObject> getGameObjects(String SQLCommand);
+    List<User> getAllUsers();
 
-    public List<Game> getGames(String SQLCommand);
+    User getUser(int userId);
 
-    public List<Post> getPosts(String SQLCommand);
+    List<GameObject> getAllGameObjects();
 
-    public List<User> getUsers(String SQLCommand);
+    List<GameObject> getGameObjectsFromPost(int postId);
 
-    public void addComment(Comment comment);
+    List<GameObject> getGameObjectsOfGame(int gameId);
 
-    public void addGameObject(GameObject gameObject);
+    GameObject getGameObject(int objectId);
 
-    public void addGame(Game game);
+    List<Game> getAllGames();
 
-    public void addPost(Post post);
+    Game getGame(int gameId);
 
-    public void addUser(User user);
+    List<Post> getAllPosts();
 
-    public void addGameObjectToPost(int gameObjectId, int postId);
+    List<Post> getPostsOfDealer(int dealerId);
+
+    Post getPost(int postId);
+
+
+    void addComment(Comment comment);
+
+    void addGameObject(GameObject gameObject);
+
+    void addGame(Game game);
+
+    void addPost(Post post);
+
+    void addUser(User user);
+
+    void addGameObjectToPost(int gameObjectId, int postId);
 }

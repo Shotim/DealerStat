@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean
-    public ViewResolver getVieWResolver(){
+    public ViewResolver getVieWResolver() {
         FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
         resolver.setOrder(1);
         resolver.setPrefix("");
@@ -24,9 +24,9 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FreeMarkerConfigurer getFreeMarkerConfigurer(){
+    public FreeMarkerConfigurer getFreeMarkerConfigurer() {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPaths("/","/WEB-INF/views/","/WEB-INF/views/entities/","/WEB-INF/views/addEntities/","/WEB-INF/views/showEntities/");
+        configurer.setTemplateLoaderPaths("/", "/WEB-INF/views/", "/WEB-INF/views/entities/", "/WEB-INF/views/addEntities/", "/WEB-INF/views/showEntities/");
         return configurer;
     }
 }

@@ -13,8 +13,8 @@
             <th>Name</th>
         </tr>
         <tr>
-            <td>${game[0].id}</td>
-            <td>${game[0].name}</td>
+            <td>${game.id}</td>
+            <td>${game.name}</td>
         </tr>
     </table>
     <table>

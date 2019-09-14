@@ -18,13 +18,13 @@
             <th>Updated at</th>
         </tr>
         <tr>
-            <td>${gameobject[0].id}</td>
-            <td>${gameobject[0].gameId}</td>
-            <td>${gameobject[0].title}</td>
-            <td>${gameobject[0].text}</td>
-            <td>${gameobject[0].status}</td>
-            <td>${gameobject[0].createdAt}</td>
-            <td>${gameobject[0].updatedAt}</td>
+            <td>${gameobject.id}</td>
+            <td>${gameobject.gameId}</td>
+            <td>${gameobject.title}</td>
+            <td>${gameobject.text}</td>
+            <td>${gameobject.status}</td>
+            <td>${gameobject.createdAt}</td>
+            <td>${gameobject.updatedAt}</td>
         </tr>
     </table>
     <br>

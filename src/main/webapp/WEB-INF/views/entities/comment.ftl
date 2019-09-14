@@ -13,12 +13,12 @@
             <th>Name</th>
         </tr>
         <tr>
-            <td>${comment[0].id}"</td>
-            <td>${comment[0].authorId}</td>
-            <td>${comment[0].message}</td>
-            <td>${comment[0].postId}</td>
-            <td>${comment[0].createdAt}</td>
-            <td>${comment[0].approved}</td>
+            <td>${comment.id}"</td>
+            <td>${comment.authorId}</td>
+            <td>${comment.message}</td>
+            <td>${comment.postId}</td>
+            <td>${comment.createdAt}</td>
+            <td>${comment.approved}</td>
         </tr>
     </table>
     <br>
