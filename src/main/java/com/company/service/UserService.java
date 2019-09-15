@@ -41,4 +41,16 @@ public interface UserService {
     void addUser(User user);
 
     void addGameObjectToPost(int gameObjectId, int postId);
+
+    void removeGameObjectFromPost(int gameObjectId, int postId);
+
+    void removePost(int postId);
+
+    void removeUser(int userId);
+
+    void removeComment(int commentId);
+
+    void editUser(User user);
+
+    void editComment(Comment comment);
 }

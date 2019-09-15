@@ -23,6 +23,12 @@
             <td>${dealer.email}</td>
             <td>${dealer.createdAt}</td>
             <td>${dealer.role}</td>
+            <td>
+                <a href="/dealer/${dealer.id}/delete">Delete</a>
+            </td>
+            <td>
+                <a href="/dealer/${dealer.id}/edit">Edit</a>
+            </td>
         </tr>
     </table>
     <br>
@@ -33,6 +39,9 @@
             <tr>
                 <td>
                     <a href="/post/${post.id}">${post.id}</a>
+                </td>
+                <td>
+                    <a href="/dealer/${dealer.id}/deletePost/${post.id}">Delete</a>
                 </td>
             </tr>
         </#list>

@@ -40,6 +40,9 @@
                 <td>${object.status}</td>
                 <td>${object.createdAt}</td>
                 <td>${object.updatedAt}</td>
+                <td>
+                    <a href="/post/${post.id}/deleteGameObject/${object.id}">Delete</a>
+                </td>
             </tr>
         </#list>
     </table>
@@ -62,6 +65,12 @@
                 <td>${comment.message}</td>
                 <td>${comment.createdAt}</td>
                 <td>${comment.approved?string('approved','not approved')}</td>
+                <td>
+                    <a href="/post/${post.id}/deleteComment/${comment.id}">Delete</a>
+                </td>
+                <td>
+                    <a href="/post/${post.id}/editComment/${comment.id}">Edit</a>
+                </td>
             </tr>
         </#list>
     </table>

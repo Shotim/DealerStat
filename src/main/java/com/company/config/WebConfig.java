@@ -26,7 +26,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public FreeMarkerConfigurer getFreeMarkerConfigurer() {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPaths("/", "/WEB-INF/views/", "/WEB-INF/views/entities/", "/WEB-INF/views/addEntities/", "/WEB-INF/views/showEntities/");
+        configurer.setTemplateLoaderPaths("/",
+                "/WEB-INF/views/",
+                "/WEB-INF/views/entities/",
+                "/WEB-INF/views/addEntities/",
+                "/WEB-INF/views/showEntities/",
+                "/WEB-INF/views/deleteEntities/",
+                "/WEB-INF/views/editEntities/");
         return configurer;
     }
 }

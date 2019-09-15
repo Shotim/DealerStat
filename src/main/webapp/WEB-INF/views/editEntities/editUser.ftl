@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adding user</title>
+    <title>Edit user</title>
 </head>
 <body>
-<h1>Add user</h1>
+<h1>Edit user</h1>
 <h2>
-    <form name="dealer" action="/newDealer" method="post">
+    <form name="dealer" action="/dealer/${dealerId}/edit" method="post">
         First name
         <input title="First name" type="text" name="firstName">
         <br>

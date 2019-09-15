@@ -41,4 +41,16 @@ public interface DataBaseService {
     void addUser(User user);
 
     void addGameObjectToPost(int gameObjectId, int postId);
+
+    void deleteGameObjectFromPost(int gameObjectId, int postId);
+
+    void deletePost(int postId);
+
+    void deleteUser(int userId);
+
+    void deleteComment(int commentId);
+
+    void editUser(User user);
+
+    void editComment(Comment comment);
 }

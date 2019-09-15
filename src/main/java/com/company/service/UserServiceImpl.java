@@ -103,4 +103,34 @@ public class UserServiceImpl implements UserService {
     public void addGameObjectToPost(int gameObjectId, int postId) {
         dataBaseService.addGameObjectToPost(gameObjectId, postId);
     }
+
+    @Override
+    public void removeGameObjectFromPost(int gameObjectId, int postId) {
+        dataBaseService.deleteGameObjectFromPost(gameObjectId, postId);
+    }
+
+    @Override
+    public void removePost(int postId) {
+        dataBaseService.deletePost(postId);
+    }
+
+    @Override
+    public void removeUser(int userId) {
+        dataBaseService.deleteUser(userId);
+    }
+
+    @Override
+    public void removeComment(int commentId) {
+        dataBaseService.deleteComment(commentId);
+    }
+
+    @Override
+    public void editUser(User user) {
+        dataBaseService.editUser(user);
+    }
+
+    @Override
+    public void editComment(Comment comment) {
+        dataBaseService.editComment(comment);
+    }
 }

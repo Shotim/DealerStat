@@ -154,7 +154,8 @@ public class UserController {
     public String newGameObjectToPostPage(@PathVariable("postId") String postId,
                                           @PathVariable("objectId") String objectId,
                                           @PathVariable("gameId") String gameId) {
-        userService.addGameObjectToPost(Integer.parseInt(objectId), Integer.parseInt(postId));
+        userService.addGameObjectToPost(
+                Integer.parseInt(objectId), Integer.parseInt(postId));
         return "newGameObjectInpost";
     }
 
@@ -176,18 +177,111 @@ public class UserController {
     }
 
     @GetMapping("/post/{id}/newComment")
-    public String newCommentPage(@PathVariable("id")String id){
+    public String newCommentPage(@PathVariable("id") String id) {
         return "newComment";
     }
 
     @PostMapping("/post/{id}/newComment")
-    public String newComment(@PathVariable("id")String postId,
-                             @ModelAttribute("comment")Comment comment){
+    public String newComment(@PathVariable("id") String postId,
+                             @ModelAttribute("comment") Comment comment) {
         comment.setId(Comment.DEFAULT_ID);
         comment.setPostId(Integer.parseInt(postId));
         comment.setCreatedAt(new Date(new java.util.Date().getTime()));
         comment.setApproved(false);
         userService.addComment(comment);
-        return "redirect: /post/"+postId;
+        return "redirect: /post/" + postId;
+    }
+
+    @GetMapping("/post/{postId}/deleteGameObject/{gameObjectId}")
+    public String deleteGameObjectFromPostPage(
+            @PathVariable("postId") String postId,
+            @PathVariable("gameObjectId") String gameObjectId) {
+        userService.removeGameObjectFromPost(
+                Integer.parseInt(gameObjectId), Integer.parseInt(postId));
+        return "deleteGameObject";
+    }
+
+    @PostMapping("/post/{postId}/deleteGameObject/{gameObjectId}")
+    public String deleteGameObjectFromPost(@PathVariable("postId") String postId) {
+        return "redirect:/post/" + postId;
+    }
+
+    @GetMapping("/post/{postId}/deleteComment/{commentId}")
+    public String deleteCommentFromPostPage(
+            @PathVariable("postId") String postId,
+            @PathVariable("commentId") String commentId) {
+        userService.removeComment(Integer.parseInt(commentId));
+        return "deleteComment";
+    }
+
+    @PostMapping("/post/{postId}/deleteComment/{commentId}")
+    public String deleteCommentFromPost(
+            @PathVariable("postId") String postId) {
+        return "redirect:/post/" + postId;
+    }
+
+    @GetMapping("/posts/deletePost/{postId}")
+    public String deletePostPage(@PathVariable("postId") String postId) {
+        userService.removePost(Integer.parseInt(postId));
+        return "deletePost";
+    }
+
+    @PostMapping("/posts/deletePost/{postId}")
+    public String deletePost(@PathVariable("postId") String postId) {
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/dealer/{dealerId}/deletePost/{postId}")
+    public String deletePostFromUserPage(
+            @PathVariable("postId") String postId,
+            @PathVariable("dealerId") String dealerId) {
+        userService.removePost(Integer.parseInt(postId));
+        return "deletePostFromUser";
+    }
+
+    @PostMapping("/dealer/{dealerId}/deletePost/{postId}")
+    public String deletePostFromUser(
+            @PathVariable("postId") String postId,
+            @PathVariable("dealerId") String dealerId) {
+        return "redirect:/dealer/" + dealerId;
+    }
+
+    @GetMapping("dealer/{dealerId}/delete")
+    public String deleteUserPage(@PathVariable("dealerId") String dealerId) {
+        userService.removeUser(Integer.parseInt(dealerId));
+        return "deleteUser";
+    }
+
+    @PostMapping("dealer/{dealerId}/delete")
+    public String deleteUser() {
+        return "redirect:/";
+    }
+
+    @GetMapping("/dealer/{dealerId}/edit")
+    public String editDealerPage(@PathVariable("dealerId") String dealerId) {
+        return "editUser";
+    }
+
+    @PostMapping("/dealer/{dealerId}/edit")
+    public String editUser(@PathVariable("dealerId") String dealerId,
+                           @ModelAttribute("dealer") User dealer) {
+        dealer.setId(Integer.parseInt(dealerId));
+        userService.editUser(dealer);
+        return "redirect:/dealer/" + dealerId;
+    }
+
+    @GetMapping("/post/{postId}/editComment/{commentId}")
+    public String editCommentPage(@PathVariable("postId") String postId,
+                                  @PathVariable("commentId") String commentId) {
+        return "editComment";
+    }
+
+    @PostMapping("/post/{postId}/editComment/{commentId}")
+    public String editComment(@PathVariable("postId") String postId,
+                              @PathVariable("commentId") String commentId,
+                              @ModelAttribute("comment") Comment comment) {
+        comment.setId(Integer.parseInt(commentId));
+        userService.editComment(comment);
+        return "redirect:/post/" + postId;
     }
 }

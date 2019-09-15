@@ -18,6 +18,9 @@
                     <a href="/post/${post.id}">${post.id}</a>
                 </td>
                 <td>${post.dealerId}</td>
+                <td>
+                    <a href="/posts/deletePost/${post.id}">Delete</a>
+                </td>
             </tr>
         </#list>
     </table>
