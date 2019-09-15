@@ -1,4 +1,4 @@
-package com.company.entity;
+package com.company.entity.user;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -23,20 +23,4 @@ public class User {
     String email;
     Date createdAt;
     Enum role;
-
-    public void createComment() {
-        //TODO
-    }
-
-    public void findPost() {
-        //TODO
-    }
-
-    public void findGameObject() {
-        //TODO
-    }
-
-    public void findDealer() {
-        //TODO
-    }
 }

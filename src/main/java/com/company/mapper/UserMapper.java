@@ -1,7 +1,7 @@
 package com.company.mapper;
 
-import com.company.entity.Role;
-import com.company.entity.User;
+import com.company.entity.user.Role;
+import com.company.entity.user.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,7 +1,7 @@
 package com.company.mapper;
 
-import com.company.entity.GameObject;
-import com.company.entity.GameObjectStatus;
+import com.company.entity.gameObject.GameObject;
+import com.company.entity.gameObject.GameObjectStatus;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

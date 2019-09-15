@@ -1,4 +1,4 @@
-package com.company.entity;
+package com.company.entity.gameObject;
 
 public enum GameObjectStatus {
     IN_STOCK, SOLD_OUT;

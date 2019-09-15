@@ -1,4 +1,4 @@
-package com.company.entity;
+package com.company.entity.gameObject;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

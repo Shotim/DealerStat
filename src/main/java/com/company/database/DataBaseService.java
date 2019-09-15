@@ -1,6 +1,10 @@
 package com.company.database;
 
-import com.company.entity.*;
+import com.company.entity.gameObject.GameObject;
+import com.company.entity.Post;
+import com.company.entity.Comment;
+import com.company.entity.Game;
+import com.company.entity.user.User;
 
 import java.util.List;
 
@@ -10,6 +14,8 @@ public interface DataBaseService {
     List<User> getAllUsers();
 
     User getUser(int userId);
+
+    User getUser(String email);
 
     List<GameObject> getAllGameObjects();
 

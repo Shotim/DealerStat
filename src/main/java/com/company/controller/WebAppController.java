@@ -22,7 +22,7 @@ import java.sql.Date;
 @Controller
 @RequestMapping("/")
 @AllArgsConstructor
-public class UserController {
+public class WebAppController {
 
     public UserService userService;
 

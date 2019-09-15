@@ -1,4 +1,4 @@
-package com.company.entity;
+package com.company.entity.user;
 
 public enum Role {
     ANONIM, ADMINISTRATOR, DEALER;

@@ -1,6 +1,10 @@
 package com.company.database;
 
-import com.company.entity.*;
+import com.company.entity.gameObject.GameObject;
+import com.company.entity.Post;
+import com.company.entity.Comment;
+import com.company.entity.Game;
+import com.company.entity.user.User;
 import com.company.mapper.*;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +27,7 @@ public class DataBaseServiceImpl implements DataBaseService {
 
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String SELECT_USER_WITH_ID = "SELECT * FROM users WHERE id=?";
+    private static final String SELECT_USER_WITH_EMAIL = "SELECT * FROM users WHERE email=?";
 
     private static final String SELECT_ALL_GAMEOBJECTS = "SELECT * FROM gameobjects";
     private static final String SELECT_ALL_GAMEOBJECTS_FROM_POST_WITH_ID = "SELECT * FROM gameobjects NATURAL JOIN post_gameobjects as pg WHERE pg.post_id=?";
@@ -62,6 +67,12 @@ public class DataBaseServiceImpl implements DataBaseService {
     public User getUser(int userId) {
         return jdbcTemplate.queryForObject(SELECT_USER_WITH_ID,
                 new UserMapper(), userId);
+    }
+
+    @Override
+    public User getUser(String email) {
+        return jdbcTemplate.queryForObject(SELECT_USER_WITH_EMAIL,
+                new UserMapper(), email);
     }
 
     @Override
