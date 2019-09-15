@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUser(String email) {
+        return dataBaseService.getUser(email);
+    }
+
+    @Override
     public List<GameObject> findAllGameObjects() {
         return dataBaseService.getAllGameObjects();
     }

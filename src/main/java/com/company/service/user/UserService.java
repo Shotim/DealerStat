@@ -12,6 +12,8 @@ public interface UserService {
 
     User findUser(int userId);
 
+    User findUser(String email);
+
     List<GameObject> findAllGameObjects();
 
     List<GameObject> findGameObjectsFromPost(int postId);
