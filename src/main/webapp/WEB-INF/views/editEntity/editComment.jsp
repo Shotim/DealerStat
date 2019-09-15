@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,8 +10,8 @@
 <h1>Edit comment</h1>
 <h2>
     <form name="comment" action="/post/${postId}/editComment/${commentId}" method="post">
-        Message
-        <input title="Message" type="text" name="message">
+        <label for="message">Message</label>
+        <input id="message" type="text" name="message">
         <br>
         <input type="submit" value="Ok">
     </form>

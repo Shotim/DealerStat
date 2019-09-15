@@ -30,7 +30,7 @@ public class DataBaseServiceImpl implements DataBaseService {
     private static final String SELECT_USER_WITH_EMAIL = "SELECT * FROM users WHERE email=?";
 
     private static final String SELECT_ALL_GAMEOBJECTS = "SELECT * FROM gameobjects";
-    private static final String SELECT_ALL_GAMEOBJECTS_FROM_POST_WITH_ID = "SELECT * FROM gameobjects NATURAL JOIN post_gameobjects as pg WHERE pg.post_id=?";
+    private static final String SELECT_ALL_GAMEOBJECTS_FROM_POST_WITH_ID = "SELECT * FROM gameobjects WHERE id IN (SELECT gameobject_id FROM post_gameobjects WHERE post_id=?)";
     private static final String SELECT_ALL_GAMEOBJECTS_WITH_GAME_ID = "SELECT * FROM gameobjects WHERE game_id=?";
     private static final String SELECT_GAMEOBJECT_WITH_ID = "SELECT * FROM gameobjects WHERE id=?";
 

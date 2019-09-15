@@ -1,44 +1,42 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Game</title>
+    <title>Game objects list</title>
 </head>
 <body>
-<h1>Game</h1>
+<h1>Game objects list</h1>
+<br>
 <h2>
     <table>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-        </tr>
-        <tr>
-            <td>${game.id}</td>
-            <td>${game.name}</td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <th>Id</th>
+            <th>Game id</th>
             <th>Title</th>
             <th>Text</th>
             <th>Status</th>
             <th>Created at</th>
             <th>Updated at</th>
         </tr>
-        <#list gameobjects as object>
+        <c:forEach var="object" items="${gameobjects}">
             <tr>
-                <td>${object.id}</td>
+                <td>
+                    <a href="/gameObject/${object.id}">${object.id}</a>
+                </td>
+                <td>
+                    <a href="/game/${object.gameId}">${object.gameId}</a>
+                </td>
                 <td>${object.title}</td>
                 <td>${object.text}</td>
                 <td>${object.status}</td>
                 <td>${object.createdAt}</td>
                 <td>${object.updatedAt}</td>
             </tr>
-        </#list>
+        </c:forEach>
     </table>
     <br>
-    <a href="../"><-BACK</a>
+    <a href="../.."><-BACK</a>
 </h2>
 </body>
 </html>

@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
             <th>Created at</th>
             <th>Role</th>
         </tr>
-        <#list users as user>
+        <c:forEach var="user" items="${users}">
             <tr>
                 <td>
                     <a href="/dealer/${user.id}">${user.id}</a>
@@ -26,10 +27,9 @@
                 <td>${user.email}</td>
                 <td>${user.createdAt}</td>
                 <td>${user.role}</td>
-                <#--            <td><a href="/delete/${user.id}">Delete</a></td>-->
-                <#--            <td><a href="/update/${user.id}">Update</a></td>-->
             </tr>
-        </#list>
+        </c:forEach>
+
     </table>
     <br>
     <a href="/newDealer">Add new user</a>

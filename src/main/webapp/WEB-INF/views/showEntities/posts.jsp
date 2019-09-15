@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,7 @@
             <th>ID</th>
             <th>Dealer id</th>
         </tr>
-        <#list posts as post>
+        <c:forEach var="post" items="${posts}">
             <tr>
                 <td>
                     <a href="/post/${post.id}">${post.id}</a>
@@ -22,7 +23,7 @@
                     <a href="/posts/deletePost/${post.id}">Delete</a>
                 </td>
             </tr>
-        </#list>
+        </c:forEach>
     </table>
     <br>
     <a href="../.."><-BACK</a>

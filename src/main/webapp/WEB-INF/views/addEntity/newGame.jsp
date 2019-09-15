@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,8 +10,8 @@
 <h1>New game object</h1>
 <h2>
     <form name="game" action="/post/${id}/newGameObjects/newGame" method="post">
-        Name
-        <input title="Name" type="text" name="name">
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name">
         <br>
         <input type="submit" value="Ok">
     </form>

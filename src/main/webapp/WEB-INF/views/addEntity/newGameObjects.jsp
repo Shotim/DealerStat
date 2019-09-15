@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,14 +14,14 @@
             <th>ID</th>
             <th>Game id</th>
         </tr>
-        <#list games as game>
+        <c:forEach var="game" items="${games}">
             <tr>
                 <td>
                     <a href="/post/${id}/newGameObjects/game/${game.id}">${game.id}</a>
                 </td>
                 <td>${game.name}</td>
             </tr>
-        </#list>
+        </c:forEach>
     </table>
     <br>
 
@@ -27,7 +29,7 @@
         If you can't find required game add new
     </a>
     <br>
-    <a href="../"><-BACK</a>
+    <a href="../../"><-BACK</a>
 </h2>
 </body>
 </html>

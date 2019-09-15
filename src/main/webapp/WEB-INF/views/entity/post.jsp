@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,10 +30,10 @@
             <th>Created at</th>
             <th>Updated at</th>
         </tr>
-        <#list gameobjects as object>
+        <c:forEach var="object" items="${gameobjects}">
             <tr>
                 <td>
-                    <a href="/gameObject/#{object.id}">#{object.id}</a>
+                    <a href="/gameObject/${object.id}">${object.id}</a>
                 </td>
                 <td>${object.gameId}</td>
                 <td>${object.title}</td>
@@ -44,7 +45,7 @@
                     <a href="/post/${post.id}/deleteGameObject/${object.id}">Delete</a>
                 </td>
             </tr>
-        </#list>
+        </c:forEach>
     </table>
     <br>
     <a href="/post/${post.id}/newComment"> Add comment</a>
@@ -58,13 +59,13 @@
             <th>Created at</th>
             <th>approved</th>
         </tr>
-        <#list comments as comment>
+        <c:forEach var="comment" items="${comments}">
             <tr>
                 <td>${comment.id}</td>
                 <td>${comment.authorId}</td>
                 <td>${comment.message}</td>
                 <td>${comment.createdAt}</td>
-                <td>${comment.approved?string('approved','not approved')}</td>
+                <td>${comment.approved}</td>
                 <td>
                     <a href="/post/${post.id}/deleteComment/${comment.id}">Delete</a>
                 </td>
@@ -72,7 +73,7 @@
                     <a href="/post/${post.id}/editComment/${comment.id}">Edit</a>
                 </td>
             </tr>
-        </#list>
+        </c:forEach>
     </table>
     <br>
     <a href="/post/${post.id}/newGameObjects">Add game object</a>

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +9,8 @@
 <body>
 <h2>
     <form name="comment" action="/post/${id}/newComment" method="post">
-        Your id
-        <input title="Your id" type="number" name="authorId">
+        <label for="authorId">Your id</label>
+        <input id="authorId" type="number" name="authorId">
         <br>
         Message
         <input title="Meddage" type="text" name="message">
