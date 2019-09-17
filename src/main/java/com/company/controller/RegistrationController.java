@@ -21,7 +21,7 @@ import java.sql.Date;
 
 @Controller
 @RequestMapping("/")
-public class WebAppController {
+public class RegistrationController {
 
     @Autowired
     public UserService userService;
@@ -46,23 +46,6 @@ public class WebAppController {
         modelAndView.setViewName("start/login");
         modelAndView.addObject("errorMessage", errorMessage);
         return modelAndView;
-    }
-
-    @PostMapping("/login")
-    public String login(@ModelAttribute("user") User user) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
-        String view = null;
-        if (user.getPassword().equals(userDetails.getPassword())) {
-            User u = userService.findUser(user.getEmail());
-            if ("DEALER".equals(u.getRole().name())) {
-                view = "redirect:/my" + u.getId();
-            } else {
-                view = "redirect:/admin";
-            }
-        } else {
-            view = "redirect:/login";
-        }
-        return view;
     }
 
     @GetMapping("/logout")
