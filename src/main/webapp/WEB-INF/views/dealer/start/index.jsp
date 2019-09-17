@@ -3,6 +3,8 @@
 <h1>Hello World!</h1>
 <br>
 <h2>
+    <a href="profile">My profile</a>
+    <br>
     <a href="dealers">Show dealers</a>
     <br>
     <a href="posts">Show posts</a>

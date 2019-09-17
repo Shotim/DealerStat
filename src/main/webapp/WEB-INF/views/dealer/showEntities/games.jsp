@@ -16,14 +16,14 @@
         <c:forEach var="game" items="${games}">
             <tr>
                 <td>
-                    <a href="/my/game/${game.id}">${game.id}</a>
+                    <a href="/my${dealerId}/game/${game.id}">${game.id}</a>
                 </td>
                 <td>${game.name}</td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <a href="/my/"><-BACK</a>
+    <a href="/my${dealerId}/"><-BACK</a>
 </h2>
 </body>
 </html>

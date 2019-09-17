@@ -9,7 +9,7 @@
 <body>
 <h1>Edit comment</h1>
 <h2>
-    <form name="comment" action="/my/post/${postId}/editComment/${commentId}" method="post">
+    <form name="comment" action="/my${dealerId}/post/${postId}/editComment/${commentId}" method="post">
         <label for="message">Message</label>
         <input id="message" type="text" name="message">
         <br>

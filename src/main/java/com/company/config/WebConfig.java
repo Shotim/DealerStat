@@ -1,6 +1,7 @@
 package com.company.config;
 
 import com.company.service.UserDetailsServiceImpl;
+import com.company.validation.WebAppValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.company.controller")
 public class WebConfig implements WebMvcConfigurer {
+
+    @Bean
+    public WebAppValidator getValidator(){
+        return new WebAppValidator();
+    }
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {

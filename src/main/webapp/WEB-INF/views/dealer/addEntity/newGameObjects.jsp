@@ -17,7 +17,7 @@
         <c:forEach var="game" items="${games}">
             <tr>
                 <td>
-                    <a href="/my/post/${id}/newGameObjects/game/${game.id}">${game.id}</a>
+                    <a href="/my${dealerId}/profile/post/${id}/newGameObjects/game/${game.id}">${game.id}</a>
                 </td>
                 <td>${game.name}</td>
             </tr>
@@ -25,11 +25,11 @@
     </table>
     <br>
 
-    <a href="/my/post/${id}/newGameObjects/newGame">
+    <a href="/my${dealerId}/profile/post/${id}/newGameObjects/newGame">
         If you can't find required game add new
     </a>
     <br>
-    <a href="../"><-BACK</a>
+    <a href="/my${dealerId}/profile/post/${id}"><-BACK</a>
 </h2>
 </body>
 </html>

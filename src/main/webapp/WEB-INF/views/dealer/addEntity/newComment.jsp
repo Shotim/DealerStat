@@ -8,10 +8,7 @@
 </head>
 <body>
 <h2>
-    <form name="comment" action="/my/post/${id}/newComment" method="post">
-        <label for="authorId">Your id</label>
-        <input id="authorId" type="number" name="authorId">
-        <br>
+    <form name="comment" action="/my${dealerId}/post/${id}/newComment" method="post">
         Message
         <input title="Meddage" type="text" name="message">
         <br>

@@ -20,7 +20,7 @@
         <c:forEach var="user" items="${users}">
             <tr>
                 <td>
-                    <a href="/my/dealer/${user.id}">${user.id}</a>
+                    <a href="/my${dealerId}/dealer/${user.id}">${user.id}</a>
                 </td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
@@ -32,7 +32,7 @@
 
     </table>
     <br>
-    <a href="/my/"><-BACK</a>
+    <a href="/my${dealerId}/"><-BACK</a>
 </h2>
 </body>
 </body>

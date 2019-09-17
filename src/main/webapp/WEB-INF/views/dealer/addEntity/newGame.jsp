@@ -4,12 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New game object</title>
+    <title>New game</title>
 </head>
 <body>
-<h1>New game object</h1>
+<h1>New game</h1>
 <h2>
-    <form name="game" action="/my/post/${id}/newGameObjects/newGame" method="post">
+    <form name="game" action="/my${dealerId}/profile/post/${id}/newGameObjects/newGame" method="post">
         <label for="name">Name</label>
         <input id="name" type="text" name="name">
         <br>

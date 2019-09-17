@@ -36,15 +36,15 @@
                 <td>${object.createdAt}</td>
                 <td>${object.updatedAt}</td>
                 <td>
-                    <a href="/post/${postId}/newGameObjects/game/${gameId}/newGameObject/${object.id}">Add this</a>
+                    <a href="/my${dealerId}/profile/post/${postId}/newGameObjects/game/${gameId}/newGameObject/${object.id}">Add this</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <a href="/post/${postId}/newGameObjects/game/${gameId}/newGameObject">If you can't find object add new</a>
+    <a href="/my${dealerId}/profile/post/${postId}/newGameObjects/game/${gameId}/newGameObject">If you can't find object add new</a>
     <br>
-    <a href="../../.."><-BACK</a>
+    <a href="../"><-BACK</a>
 </h2>
 </body>
 </html>

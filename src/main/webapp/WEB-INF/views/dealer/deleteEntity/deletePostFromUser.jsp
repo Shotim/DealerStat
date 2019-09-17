@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-    <form name="submittion" action="/dealer/${dealerId}/deletePost/${postId}" method="post">
+    <form name="submittion" action="/my${dealerId}/profile/deletePost/${postId}" method="post">
         Post was successfully removed!
         <br>
         <input type="submit" value="Ok">

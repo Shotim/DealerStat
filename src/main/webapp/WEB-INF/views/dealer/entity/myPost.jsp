@@ -33,7 +33,7 @@
         <c:forEach var="object" items="${gameobjects}">
             <tr>
                 <td>
-                    <a href="/gameObject/${object.id}">${object.id}</a>
+                    <a href="/my${dealerId}/gameObject/${object.id}">${object.id}</a>
                 </td>
                 <td>${object.gameId}</td>
                 <td>${object.title}</td>
@@ -42,13 +42,12 @@
                 <td>${object.createdAt}</td>
                 <td>${object.updatedAt}</td>
                 <td>
-                    <a href="/post/${post.id}/deleteGameObject/${object.id}">Delete</a>
+                    <a href="/my${dealerId}/profile/post/${post.id}/deleteGameObject/${object.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
-    <br>
-    <a href="/post/${post.id}/newComment"> Add comment</a>
+    <a href="/my${dealerId}/profile/post/${post.id}/newGameObjects">Add game object</a>
     <br>
     Comments
     <table>
@@ -67,18 +66,16 @@
                 <td>${comment.createdAt}</td>
                 <td>${comment.approved}</td>
                 <td>
-                    <a href="/post/${post.id}/deleteComment/${comment.id}">Delete</a>
+                    <a href="/my${dealerId}/post/${post.id}/deleteComment/${comment.id}">Delete</a>
                 </td>
                 <td>
-                    <a href="/post/${post.id}/editComment/${comment.id}">Edit</a>
+                    <a href="/my${dealerId}/post/${post.id}/editComment/${comment.id}">Edit</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <a href="/post/${post.id}/newGameObjects">Add game object</a>
-    <br>
-    <a href="../../../.."><-BACK</a>
+    <a href="../"><-BACK</a>
 </h2>
 </body>
 </html>

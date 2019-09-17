@@ -9,7 +9,7 @@
 <body>
 <h1>Add game object</h1>
 <h2>
-    <form name="gameobject" action="/my/post/${postId}/newGameObjects/game/${gameId}/newGameObject" method="post">
+    <form name="gameobject" action="/my${dealerId}/profile/post/${postId}/newGameObjects/game/${gameId}/newGameObject" method="post">
         <label for="title">Title</label>
         <input id="title" type="text" name="title">
         <label for="text">Text</label>
