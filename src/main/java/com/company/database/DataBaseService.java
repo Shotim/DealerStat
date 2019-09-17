@@ -11,6 +11,8 @@ import java.util.List;
 public interface DataBaseService {
     List<Comment> getCommentsFromPost(int postId);
 
+    List<Comment> getUnapprovedComments();
+
     List<User> getAllUsers();
 
     User getUser(int userId);
@@ -35,7 +37,6 @@ public interface DataBaseService {
 
     Post getPost(int postId);
 
-
     void addComment(Comment comment);
 
     void addGameObject(GameObject gameObject);
@@ -59,4 +60,6 @@ public interface DataBaseService {
     void editUser(User user);
 
     void editComment(Comment comment);
+
+    void makeCommentApproved(int commentId);
 }

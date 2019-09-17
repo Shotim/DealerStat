@@ -1,9 +1,9 @@
 package com.company.database;
 
-import com.company.entity.gameObject.GameObject;
-import com.company.entity.Post;
 import com.company.entity.Comment;
 import com.company.entity.Game;
+import com.company.entity.Post;
+import com.company.entity.gameObject.GameObject;
 import com.company.entity.user.User;
 import com.company.mapper.*;
 import lombok.AllArgsConstructor;
@@ -24,8 +24,9 @@ public class DataBaseServiceImpl implements DataBaseService {
     private static final String INSERT_GAMEOBJECT_TO_POST = "INSERT INTO post_gameobjects (post_id, gameobject_id) VALUES (?,?)";
 
     private static final String SELECT_COMMENTS_WITH_POST_ID = "SELECT * FROM comments WHERE post_id=?";
+    private static final String SELECT_UNAPPROVED_COMMENTS = "SELECT * FROM comments WHERE approved=0";
 
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
+    private static final String SELECT_ALL_USERS = "SELECT * FROM users WHERE role='DEALER'";
     private static final String SELECT_USER_WITH_ID = "SELECT * FROM users WHERE id=?";
     private static final String SELECT_USER_WITH_EMAIL = "SELECT * FROM users WHERE email=?";
 
@@ -48,6 +49,7 @@ public class DataBaseServiceImpl implements DataBaseService {
 
     private static final String EDIT_USER_WITH_ID = "UPDATE users SET first_name=?, last_name=?, password=?, email=? WHERE id=?";
     private static final String EDIT_COMMENT_WITH_ID = "UPDATE comments SET message=? WHERE id=?";
+    private static final String APPROVE_COMMENT = "UPDATE comments SET approved=1 WHERE id=?";
 
     public final JdbcTemplate jdbcTemplate;
 
@@ -55,6 +57,11 @@ public class DataBaseServiceImpl implements DataBaseService {
     public List<Comment> getCommentsFromPost(int postId) {
         return jdbcTemplate.query(SELECT_COMMENTS_WITH_POST_ID,
                 new CommentMapper(), postId);
+    }
+
+    @Override
+    public List<Comment> getUnapprovedComments() {
+        return jdbcTemplate.query(SELECT_UNAPPROVED_COMMENTS, new CommentMapper());
     }
 
     @Override
@@ -202,5 +209,10 @@ public class DataBaseServiceImpl implements DataBaseService {
     @Override
     public void editComment(Comment comment) {
         jdbcTemplate.update(EDIT_COMMENT_WITH_ID, comment.getMessage(), comment.getId());
+    }
+
+    @Override
+    public void makeCommentApproved(int commentId) {
+        jdbcTemplate.update(APPROVE_COMMENT,commentId);
     }
 }

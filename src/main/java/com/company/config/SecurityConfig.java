@@ -1,9 +1,8 @@
 package com.company.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,14 +14,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@ComponentScan("com.company.config")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public UserDetailsService userDetailsService;
 
     @Autowired
-    public void registerGlobalAuthentication(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(userDetailsService).passwordEncoder((PasswordEncoder)getShaPasswordEncoder());
+    public PasswordEncoder passwordEncoder;
+
+    @Override
+    public void configure(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -45,12 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .permitAll()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/lohin?logout")
+                .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
-    }
-
-    @Bean
-    public ShaPasswordEncoder getShaPasswordEncoder() {
-        return new ShaPasswordEncoder();
+        http
+                .authorizeRequests()
+                .antMatchers("/..", "/login", "/signUp").permitAll()
+                .antMatchers("/my/**").hasRole("DEALER")
+                .antMatchers("/admin/**").hasRole("ADMINISTRATOR")
+                .anyRequest().authenticated();
     }
 }

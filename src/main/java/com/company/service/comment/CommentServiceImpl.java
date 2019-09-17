@@ -19,6 +19,11 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
+    public List<Comment> findUnapprovedComments() {
+        return dataBaseService.getUnapprovedComments();
+    }
+
+    @Override
     public void addComment(Comment comment) {
         dataBaseService.addComment(comment);
     }
@@ -31,5 +36,10 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public void editComment(Comment comment) {
         dataBaseService.editComment(comment);
+    }
+
+    @Override
+    public void approveComment(int commentId) {
+        dataBaseService.makeCommentApproved(commentId);
     }
 }
