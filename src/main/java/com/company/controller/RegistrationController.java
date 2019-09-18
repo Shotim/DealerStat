@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,6 +46,14 @@ public class RegistrationController {
         }
         modelAndView.setViewName("start/login");
         modelAndView.addObject("errorMessage", errorMessage);
+        return modelAndView;
+    }
+
+    @GetMapping("/welcome")
+    public ModelAndView welcome(Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(model);
+        modelAndView.setViewName("start/welcome");
         return modelAndView;
     }
 
