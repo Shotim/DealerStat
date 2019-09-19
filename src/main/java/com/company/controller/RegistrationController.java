@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class RegistrationController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public PasswordEncoder encoder;
 
     @Autowired
     public WebAppValidator validator;
@@ -85,8 +89,9 @@ public class RegistrationController {
             modelAndView.setViewName("start/signUp");
             return modelAndView;
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setId(User.DEFAULT_ID);
-        user.setRole(Role.DEALER);
+        user.setRole(Role.ROLE_DEALER);
         user.setCreatedAt(new Date(new java.util.Date().getTime()));
         userService.addUser(user);
         modelAndView.setViewName("redirect:/my" + userService.findUser(user.getEmail()));

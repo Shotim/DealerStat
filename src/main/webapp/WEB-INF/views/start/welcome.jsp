@@ -13,7 +13,7 @@
 <body>
 <h1>
     Welcome, <a href="/my${user.id}">dealer</a>
-    <a href="/admin">admin</a>
+    <a href="/admin/">admin</a>
 </h1>
 </body>
 </html>
