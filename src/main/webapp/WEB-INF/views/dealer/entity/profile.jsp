@@ -25,7 +25,7 @@
             <td>${dealer.createdAt}</td>
             <td>${dealer.role}</td>
             <td>
-                <a href="/my${dealerId}/profile/edit">Edit</a>
+                <a href="/my/profile/edit">Edit</a>
             </td>
         </tr>
     </table>
@@ -36,19 +36,19 @@
         <c:forEach var="post" items="${posts}">
             <tr>
                 <td>
-                    <a href="/my${dealerId}/profile/post/${post.id}">${post.id}</a>
+                    <a href="/my/profile/post/${post.id}">${post.id}</a>
                 </td>
                 <td>
-                    <a href="/my${dealerId}/profile/deletePost/${post.id}">Delete</a>
+                    <a href="/my/profile/deletePost/${post.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <a href="/my${dealerId}/profile/newPost">Add post</a>
+    <a href="/my/profile/newPost">Add post</a>
     <br>
     <br>
-    <a href="/my${dealerId}/"><-BACK</a>
+    <a href="/my/"><-BACK</a>
 </h2>
 </body>
 </html>

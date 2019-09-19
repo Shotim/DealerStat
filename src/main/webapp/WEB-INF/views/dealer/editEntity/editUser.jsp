@@ -9,7 +9,7 @@
 <body>
 <h1>Edit user</h1>
 <h2>
-    <form name="dealer" action="/my${dealerId}/profile/edit" method="post">
+    <form name="dealer" action="/my/profile/edit" method="post">
         <label for="firstName">First Name</label>
         <input type="text" name="firstName" id="firstName">
         <label for="lastName">Last Name</label>

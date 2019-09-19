@@ -9,7 +9,7 @@
 <body>
 <h1>New game</h1>
 <h2>
-    <form name="game" action="/my${dealerId}/profile/post/${id}/newGameObjects/newGame" method="post">
+    <form name="game" action="/my/profile/post/${id}/newGameObjects/newGame" method="post">
         <label for="name">Name</label>
         <input id="name" type="text" name="name">
         <br>

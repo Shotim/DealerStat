@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-    <form name="submittion" action="/my${dealerId}/profile/post/${postId}/deleteGameObject/${gameObjectId}" method="post">
+    <form name="submittion" action="/my/profile/post/${postId}/deleteGameObject/${gameObjectId}" method="post">
         Game object was successfully removed from post!
         <br>
         <input type="submit" value="Ok">

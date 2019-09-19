@@ -33,7 +33,7 @@
         <c:forEach var="object" items="${gameobjects}">
             <tr>
                 <td>
-                    <a href="/my${dealerId}/gameObject/${object.id}">${object.id}</a>
+                    <a href="/my/gameObject/${object.id}">${object.id}</a>
                 </td>
                 <td>${object.gameId}</td>
                 <td>${object.title}</td>
@@ -61,15 +61,15 @@
                 <td>${comment.createdAt}</td>
                 <td>${comment.approved}</td>
                 <td>
-                    <a href="/my${dealerId}/post/${post.id}/deleteComment/${comment.id}">Delete</a>
+                    <a href="/my/post/${post.id}/deleteComment/${comment.id}">Delete</a>
                 </td>
                 <td>
-                    <a href="/my${dealerId}/post/${post.id}/editComment/${comment.id}">Edit</a>
+                    <a href="/my/post/${post.id}/editComment/${comment.id}">Edit</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
-    <a href="/my${dealerId}/post/${post.id}/newComment">Add comment</a>
+    <a href="/my/post/${post.id}/newComment">Add comment</a>
     <br>
     <a href="../"><-BACK</a>
 </h2>

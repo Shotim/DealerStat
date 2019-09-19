@@ -22,10 +22,10 @@
         <c:forEach var="object" items="${gameobjects}">
             <tr>
                 <td>
-                    <a href="/my${dealerId}/gameObject/${object.id}">${object.id}</a>
+                    <a href="/my/gameObject/${object.id}">${object.id}</a>
                 </td>
                 <td>
-                    <a href="/my${dealerId}/game/${object.gameId}">${object.gameId}</a>
+                    <a href="/my/game/${object.gameId}">${object.gameId}</a>
                 </td>
                 <td>${object.title}</td>
                 <td>${object.text}</td>
@@ -36,7 +36,7 @@
         </c:forEach>
     </table>
     <br>
-    <a href="/my${dealerId}/"><-BACK</a>
+    <a href="/my/"><-BACK</a>
 </h2>
 </body>
 </html>

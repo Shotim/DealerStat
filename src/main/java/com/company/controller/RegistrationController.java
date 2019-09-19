@@ -7,7 +7,6 @@ import com.company.validation.WebAppValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -54,9 +53,11 @@ public class RegistrationController {
     }
 
     @GetMapping("/welcome")
-    public ModelAndView welcome(Model model){
+    public ModelAndView welcome(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(model);
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        modelAndView.addObject("user",userService.findUser(userEmail));
         modelAndView.setViewName("start/welcome");
         return modelAndView;
     }

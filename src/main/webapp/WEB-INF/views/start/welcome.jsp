@@ -12,7 +12,9 @@
 </head>
 <body>
 <h1>
-    Welcome, <a href="/my${user.id}">dealer</a>
+    Welcome,
+    <a href="/anonym/">anonym</a>
+    <a href="/my/">dealer</a>
     <a href="/admin/">admin</a>
 </h1>
 </body>
