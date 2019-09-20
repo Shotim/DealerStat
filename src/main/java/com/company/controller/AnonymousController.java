@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Date;
-
 @Controller
 @RequestMapping("/anonym/")
 @AllArgsConstructor
@@ -43,7 +41,7 @@ public class AnonymousController {
         return modelAndView;
     }
 
-    @GetMapping("/gameObject/{id}")
+    @GetMapping("/gameObjects/{id}")
     public ModelAndView gameObject(@PathVariable("id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("anonym/entity/gameObject");
@@ -61,7 +59,7 @@ public class AnonymousController {
         return modelAndView;
     }
 
-    @GetMapping("/game/{id}")
+    @GetMapping("/games/{id}")
     public ModelAndView game(@PathVariable("id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("anonym/entity/game");
@@ -81,7 +79,7 @@ public class AnonymousController {
         return modelAndView;
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/posts/{id}")
     public ModelAndView post(@PathVariable("id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("anonym/entity/post");
@@ -103,7 +101,7 @@ public class AnonymousController {
         return modelAndView;
     }
 
-    @GetMapping("/dealer/{id}")
+    @GetMapping("/dealers/{id}")
     public ModelAndView dealer(@PathVariable("id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("anonym/entity/dealer");
@@ -114,28 +112,24 @@ public class AnonymousController {
         return modelAndView;
     }
 
-    @GetMapping("/post/{id}/newComment")
+    @GetMapping("/posts/{id}/comment")
     public ModelAndView newComment(@PathVariable("id") String id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("anonym/addEntity/newComment");
         return modelAndView;
     }
 
-    @PostMapping("/post/{id}/newComment")
+    @PostMapping("/posts/{id}/comment")
     public ModelAndView newComment(@PathVariable("id") String postId,
                                    @ModelAttribute("comment") Comment comment) {
-        comment.setId(Comment.DEFAULT_ID);
-        comment.setPostId(Integer.parseInt(postId));
-        comment.setCreatedAt(new Date(new java.util.Date().getTime()));
-        comment.setAuthorId(Comment.DEFAULT_ID);
-        comment.setApproved(false);
-        commentService.addComment(comment);
+
+        Controllers.addDefaultComment(comment, postId, Comment.DEFAULT_ID, commentService);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect: /anonym/post/" + postId);
+        modelAndView.setViewName("redirect: /anonym/posts/" + postId);
         return modelAndView;
     }
 
-    @GetMapping("/post/{postId}/editComment/{commentId}")
+    @GetMapping("/posts/{postId}/comments/{commentId}")
     public ModelAndView editComment(@PathVariable("postId") String postId,
                                     @PathVariable("commentId") String commentId) {
         ModelAndView modelAndView = new ModelAndView();
@@ -143,14 +137,14 @@ public class AnonymousController {
         return modelAndView;
     }
 
-    @PostMapping("/post/{postId}/editComment/{commentId}")
+    @PostMapping("/posts/{postId}/comments/{commentId}")
     public ModelAndView editComment(@PathVariable("postId") String postId,
                                     @PathVariable("commentId") String commentId,
                                     @ModelAttribute("comment") Comment comment) {
         comment.setId(Integer.parseInt(commentId));
         commentService.editComment(comment);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/post/" + postId);
+        modelAndView.setViewName("redirect:/posts/" + postId);
         return modelAndView;
     }
 }
