@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/admin/")
 @AllArgsConstructor
-public class CommentController {
+public class AdminCommentController {
 
-    public CommentService commentService;
+    private CommentService commentService;
 
     @GetMapping("/unapprovedComments")
     public ModelAndView showUnapprovedComments() {

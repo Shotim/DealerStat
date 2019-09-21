@@ -1,6 +1,6 @@
 package com.company.controller.anonym;
 
-import com.company.controller.Controllers;
+import com.company.controller.ControllerUtility;
 import com.company.entity.Comment;
 import com.company.service.comment.CommentService;
 import lombok.AllArgsConstructor;
@@ -14,15 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/anonym/")
 @AllArgsConstructor
-public class CommentController {
+public class AnonymCommentController {
 
     private CommentService commentService;
+
+    private ControllerUtility controllerUtility;
 
     @PostMapping("/posts/{id}/comment")
     public ModelAndView createComment(@PathVariable("id") String postId,
                                       @ModelAttribute("comment") Comment comment) {
 
-        Controllers.addDefaultComment(comment, postId, Comment.DEFAULT_ID, commentService);
+        controllerUtility.addDefaultComment(comment, postId, Comment.DEFAULT_ID);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect: /anonym/posts/" + postId);
         return modelAndView;

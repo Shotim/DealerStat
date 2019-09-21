@@ -1,6 +1,6 @@
 package com.company.service.gameobject;
 
-import com.company.database.DataBaseService;
+import com.company.database.GameObjectRepository;
 import com.company.entity.gameObject.GameObject;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,42 +10,42 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GameObjectServiceImpl implements GameObjectService{
-
-    public DataBaseService dataBaseService;
+    
+    public GameObjectRepository gameObjectRepository;
 
     @Override
     public List<GameObject> findAllGameObjects() {
-        return dataBaseService.getAllGameObjects();
+        return gameObjectRepository.getAllGameObjects();
     }
 
     @Override
     public List<GameObject> findGameObjectsFromPost(int postId) {
-        return dataBaseService.getGameObjectsFromPost(postId);
+        return gameObjectRepository.getGameObjectsFromPost(postId);
     }
 
     @Override
     public List<GameObject> findGameObjectsOfGame(int gameId) {
-        return dataBaseService.getGameObjectsOfGame(gameId);
+        return gameObjectRepository.getGameObjectsOfGame(gameId);
     }
 
     @Override
     public GameObject findGameObject(int objectId) {
-        return dataBaseService.getGameObject(objectId);
+        return gameObjectRepository.getGameObject(objectId);
     }
 
     @Override
     public void addGameObject(GameObject gameObject) {
-        dataBaseService.addGameObject(gameObject);
+        gameObjectRepository.addGameObject(gameObject);
     }
 
     @Override
     public void addGameObjectToPost(int gameObjectId, int postId) {
-        dataBaseService.addGameObjectToPost(gameObjectId, postId);
+        gameObjectRepository.addGameObjectToPost(gameObjectId, postId);
     }
 
     @Override
     public void removeGameObjectFromPost(int gameObjectId, int postId) {
-        dataBaseService.deleteGameObjectFromPost(gameObjectId, postId);
+        gameObjectRepository.deleteGameObjectFromPost(gameObjectId, postId);
     }
 
 }

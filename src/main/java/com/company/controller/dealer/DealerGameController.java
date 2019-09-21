@@ -1,9 +1,6 @@
 package com.company.controller.dealer;
 
-import com.company.controller.Controllers;
-import com.company.service.game.GameService;
-import com.company.service.gameobject.GameObjectService;
-import com.company.service.user.UserService;
+import com.company.controller.ControllerUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +11,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/id{dealerId}")
 @AllArgsConstructor
-public class GameController {
+public class DealerGameController {
 
-    private UserService userService;
-
-    private GameService gameService;
-
-    private GameObjectService gameObjectService;
+    private ControllerUtility controllerUtility;
 
     @GetMapping("/games")
     public ModelAndView showGames() {
 
-        int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = Controllers.viewGamesPage(
-                "dealer/showEntities/games", gameService);
+        int dealerId = controllerUtility.sessionDealerId();
+        ModelAndView modelAndView = controllerUtility.viewGamesPage(
+                "dealer/showEntities/games");
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -35,9 +28,9 @@ public class GameController {
     @GetMapping("/games/{id}")
     public ModelAndView showGameWithId(@PathVariable("id") String id) {
 
-        int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = Controllers.viewGameWithId(
-                "dealer/entity/game", id, gameService, gameObjectService);
+        int dealerId = controllerUtility.sessionDealerId();
+        ModelAndView modelAndView = controllerUtility.viewGameWithId(
+                "dealer/entity/game", id);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }

@@ -1,6 +1,7 @@
 package com.company.config;
 
 
+import com.company.controller.ControllerUtility;
 import com.company.database.constants.DataBaseConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,4 +30,5 @@ public class AppConfig {
 
         return dataSource;
     }
+
 }

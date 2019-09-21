@@ -1,9 +1,6 @@
 package com.company.controller.admin;
 
-import com.company.controller.Controllers;
-import com.company.service.comment.CommentService;
-import com.company.service.gameobject.GameObjectService;
-import com.company.service.post.PostService;
+import com.company.controller.ControllerUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,25 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/admin/")
 @AllArgsConstructor
-public class PostController {
+public class AdminPostController {
 
-    private PostService postService;
-
-    private GameObjectService gameObjectService;
-
-    private CommentService commentService;
+    private ControllerUtility controllerUtility;
 
     @GetMapping("/posts")
     public ModelAndView showPosts() {
 
-        return Controllers.viewPostsPage(
-                "admin/showEntities/posts", postService);
+        return controllerUtility.viewPostsPage(
+                "admin/showEntities/posts");
     }
 
     @GetMapping("/posts/{id}")
     public ModelAndView showPostWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewPostWithId(
-                "admin/entity/post", id, postService, gameObjectService, commentService);
+        return controllerUtility.viewPostWithId(
+                "admin/entity/post", id);
     }
 }

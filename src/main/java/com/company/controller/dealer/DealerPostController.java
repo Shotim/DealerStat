@@ -11,26 +11,26 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/id{dealerId}")
 @AllArgsConstructor
-public class DealerController {
+public class DealerPostController {
 
     private ControllerUtility controllerUtility;
 
-    @GetMapping("/dealers")
-    public ModelAndView showDealers() {
+    @GetMapping("/posts")
+    public ModelAndView showPosts() {
 
         int dealerId = controllerUtility.sessionDealerId();
-        ModelAndView modelAndView = controllerUtility.viewDealersPage(
-                "dealer/showEntities/dealers");
+        ModelAndView modelAndView = controllerUtility.viewPostsPage(
+                "dealer/showEntities/posts");
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
 
-    @GetMapping("/dealers/{id}")
-    public ModelAndView showDealerWithId(@PathVariable("id") String id) {
+    @GetMapping("/posts/{id}")
+    public ModelAndView showPostWithId(@PathVariable("id") String id) {
 
         int dealerId = controllerUtility.sessionDealerId();
-        ModelAndView modelAndView = controllerUtility.viewDealerWithId(
-                "dealer/entity/dealer", id);
+        ModelAndView modelAndView = controllerUtility.viewPostWithId(
+                "dealer/entity/post", id);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }

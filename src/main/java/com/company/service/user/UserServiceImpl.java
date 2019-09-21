@@ -1,12 +1,7 @@
 package com.company.service.user;
 
-import com.company.database.DataBaseService;
-import com.company.entity.gameObject.GameObject;
-import com.company.entity.Post;
-import com.company.entity.Comment;
-import com.company.entity.Game;
+import com.company.database.UserRepository;
 import com.company.entity.user.User;
-import com.company.service.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +10,22 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
-
-    public DataBaseService dataBaseService;
-
-
-
-
+    
+    public UserRepository userRepository;
+    
     @Override
     public List<User> findAllUsers() {
-        return dataBaseService.getAllUsers();
+        return userRepository.getAllUsers();
     }
 
     @Override
     public User findUser(int userId) {
-        return dataBaseService.getUser(userId);
+        return userRepository.getUser(userId);
     }
 
     @Override
     public User findUser(String email) {
-        return dataBaseService.getUser(email);
+        return userRepository.getUser(email);
     }
 
 
@@ -53,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        dataBaseService.addUser(user);
+        userRepository.addUser(user);
     }
 
 
@@ -62,14 +54,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeUser(int userId) {
-        dataBaseService.deleteUser(userId);
+        userRepository.deleteUser(userId);
     }
 
 
 
     @Override
     public void editUser(User user) {
-        dataBaseService.editUser(user);
+        userRepository.editUser(user);
     }
 
 

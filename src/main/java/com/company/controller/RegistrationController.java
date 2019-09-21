@@ -4,6 +4,7 @@ import com.company.entity.user.Role;
 import com.company.entity.user.User;
 import com.company.service.user.UserService;
 import com.company.validation.WebAppValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,16 +22,14 @@ import java.sql.Date;
 
 @Controller
 @RequestMapping("/")
+@AllArgsConstructor
 public class RegistrationController {
 
-    @Autowired
-    public UserService userService;
+    private UserService userService;
 
-    @Autowired
-    public PasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
-    @Autowired
-    public WebAppValidator validator;
+    private WebAppValidator validator;
 
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,

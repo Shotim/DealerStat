@@ -6,22 +6,35 @@ import com.company.service.game.GameService;
 import com.company.service.gameobject.GameObjectService;
 import com.company.service.post.PostService;
 import com.company.service.user.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
 
-public class Controllers {
+@Component
+@AllArgsConstructor
+public class ControllerUtility {
 
-    public static int sessionDealerId(UserService userService) {
+    private UserService userService;
+
+    private CommentService commentService;
+
+    private PostService postService;
+
+    private GameService gameService;
+
+    private GameObjectService gameObjectService;
+
+    public int sessionDealerId() {
         return userService.findUser(
                 SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
-    public static void addDefaultComment(Comment comment,
+    public void addDefaultComment(Comment comment,
                                          String postId,
-                                         int authorId,
-                                         CommentService commentService) {
+                                         int authorId) {
 
         comment.setId(Comment.DEFAULT_ID);
         comment.setPostId(Integer.parseInt(postId));
@@ -31,23 +44,21 @@ public class Controllers {
         commentService.addComment(comment);
     }
 
-    public static ModelAndView startPage(String viewName) {
+    public ModelAndView startPage(String viewName) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         return modelAndView;
     }
 
-    public static ModelAndView viewDealersPage(String viewName, UserService userService) {
+    public ModelAndView viewDealersPage(String viewName) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("users", userService.findAllUsers());
         return modelAndView;
     }
 
-    public static ModelAndView viewDealerWithId(String viewName,
-                                                String dealerId,
-                                                UserService userService,
-                                                PostService postService) {
+    public ModelAndView viewDealerWithId(String viewName,
+                                                String dealerId) {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
@@ -58,17 +69,15 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewGamesPage(String viewName, GameService gameService) {
+    public ModelAndView viewGamesPage(String viewName) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("games", gameService.findAllGames());
         return modelAndView;
     }
 
-    public static ModelAndView viewGameWithId(String viewName,
-                                              String gameId,
-                                              GameService gameService,
-                                              GameObjectService gameObjectService) {
+    public ModelAndView viewGameWithId(String viewName,
+                                              String gameId) {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
@@ -79,16 +88,15 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewGameObjectsPage(String viewName, GameObjectService gameObjectService) {
+    public ModelAndView viewGameObjectsPage(String viewName) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("gameobjects", gameObjectService.findAllGameObjects());
         return modelAndView;
     }
 
-    public static ModelAndView viewGameObjectWithId(String viewName,
-                                                    String gameObjectId,
-                                                    GameObjectService gameObjectService) {
+    public ModelAndView viewGameObjectWithId(String viewName,
+                                                    String gameObjectId) {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
@@ -97,7 +105,7 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewPostsPage(String viewName, PostService postService) {
+    public ModelAndView viewPostsPage(String viewName) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("posts",
@@ -105,11 +113,8 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewPostWithId(String viewName,
-                                              String postId,
-                                              PostService postService,
-                                              GameObjectService gameObjectService,
-                                              CommentService commentService) {
+    public ModelAndView viewPostWithId(String viewName,
+                                              String postId) {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);

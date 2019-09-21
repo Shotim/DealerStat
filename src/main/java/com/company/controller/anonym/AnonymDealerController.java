@@ -1,8 +1,6 @@
-package com.company.controller.admin;
+package com.company.controller.anonym;
 
-import com.company.controller.Controllers;
-import com.company.service.post.PostService;
-import com.company.service.user.UserService;
+import com.company.controller.ControllerUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,25 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/")
+@RequestMapping("/anonym/")
 @AllArgsConstructor
-public class DealerController {
+public class AnonymDealerController {
 
-    private UserService userService;
-
-    private PostService postService;
+    private ControllerUtility controllerUtility;
 
     @GetMapping("/dealers")
     public ModelAndView showDealers() {
 
-        return Controllers.viewDealersPage(
-                "admin/showEntities/dealers", userService);
+        return controllerUtility.viewDealersPage(
+                "anonym/showEntities/dealers");
     }
 
     @GetMapping("/dealers/{id}")
     public ModelAndView showDealerWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewDealerWithId(
-                "admin/entity/dealer", id, userService, postService);
+        return controllerUtility.viewDealerWithId(
+                "anonym/entity/dealer", id);
     }
 }

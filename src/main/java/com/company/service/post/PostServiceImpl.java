@@ -1,7 +1,7 @@
 package com.company.service.post;
 
 
-import com.company.database.DataBaseService;
+import com.company.database.PostRepository;
 import com.company.entity.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,31 +11,31 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class PostServiceImpl implements PostService{
-
-    public DataBaseService dataBaseService;
+    
+    public PostRepository postRepository;
 
     @Override
     public List<Post> findAllPosts() {
-        return dataBaseService.getAllPosts();
+        return postRepository.getAllPosts();
     }
 
     @Override
     public List<Post> findPostsOfDealer(int dealerId) {
-        return dataBaseService.getPostsOfDealer(dealerId);
+        return postRepository.getPostsOfDealer(dealerId);
     }
 
     @Override
     public Post findPost(int postId) {
-        return dataBaseService.getPost(postId);
+        return postRepository.getPost(postId);
     }
 
     @Override
     public void addPost(Post post) {
-        dataBaseService.addPost(post);
+        postRepository.addPost(post);
     }
 
     @Override
     public void removePost(int postId) {
-        dataBaseService.deletePost(postId);
+        postRepository.deletePost(postId);
     }
 }

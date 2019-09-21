@@ -1,9 +1,6 @@
 package com.company.controller.anonym;
 
-import com.company.controller.Controllers;
-import com.company.service.comment.CommentService;
-import com.company.service.gameobject.GameObjectService;
-import com.company.service.post.PostService;
+import com.company.controller.ControllerUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,25 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/anonym/")
 @AllArgsConstructor
-public class PostController {
+public class AnonymPostController {
 
-    private PostService postService;
-
-    private GameObjectService gameObjectService;
-
-    private CommentService commentService;
+    private ControllerUtility controllerUtility;
 
     @GetMapping("/posts")
     public ModelAndView showPosts() {
 
-        return Controllers.viewPostsPage(
-                "anonym/showEntities/posts", postService);
+        return controllerUtility.viewPostsPage(
+                "anonym/showEntities/posts");
     }
 
     @GetMapping("/posts/{id}")
     public ModelAndView showPostWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewPostWithId(
-                "anonym/entity/post", id, postService, gameObjectService, commentService);
+        return controllerUtility.viewPostWithId(
+                "anonym/entity/post", id);
     }
 }

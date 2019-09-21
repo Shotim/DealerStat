@@ -1,9 +1,8 @@
 package com.company.controller.dealer;
 
-import com.company.controller.Controllers;
+import com.company.controller.ControllerUtility;
 import com.company.entity.Comment;
 import com.company.service.comment.CommentService;
-import com.company.service.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/id{dealerId}")
 @AllArgsConstructor
-public class CommentController {
-
-    private UserService userService;
+public class DealerCommentController {
 
     private CommentService commentService;
+
+    private ControllerUtility controllerUtility;
 
     @PutMapping("/posts/{postId}/comments/{commentId}")
     public ModelAndView editComment(
@@ -24,7 +23,7 @@ public class CommentController {
             @PathVariable("commentId") String commentId,
             @ModelAttribute("comment") Comment comment) {
 
-        int dealerId = Controllers.sessionDealerId(userService);
+        int dealerId = controllerUtility.sessionDealerId();
         comment.setId(Integer.parseInt(commentId));
         commentService.editComment(comment);
         ModelAndView modelAndView = new ModelAndView();
@@ -38,8 +37,8 @@ public class CommentController {
             @PathVariable("id") String postId,
             @ModelAttribute("comment") Comment comment) {
 
-        int dealerId = Controllers.sessionDealerId(userService);
-        Controllers.addDefaultComment(comment, postId, dealerId, commentService);
+        int dealerId = controllerUtility.sessionDealerId();
+        controllerUtility.addDefaultComment(comment, postId, dealerId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect: /id" + dealerId + "/post/" + postId);
         modelAndView.addObject("dealerId", dealerId);
@@ -51,7 +50,7 @@ public class CommentController {
             @PathVariable("postId") String postId,
             @PathVariable("commentId") String commentId) {
 
-        int dealerId = Controllers.sessionDealerId(userService);
+        int dealerId = controllerUtility.sessionDealerId();
         commentService.removeComment(Integer.parseInt(commentId));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/id" + dealerId + "/post/" + postId);

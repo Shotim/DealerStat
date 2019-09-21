@@ -1,7 +1,6 @@
-package com.company.controller.admin;
+package com.company.controller.anonym;
 
-import com.company.controller.Controllers;
-import com.company.service.gameobject.GameObjectService;
+import com.company.controller.ControllerUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/")
+@RequestMapping("/anonym/")
 @AllArgsConstructor
-public class GameObjectController {
+public class AnonymGameObjectController {
 
-    private GameObjectService gameObjectService;
+    private ControllerUtility controllerUtility;
 
     @GetMapping("/gameObjects")
     public ModelAndView showGameObjects() {
 
-        return Controllers.viewGameObjectsPage(
-                "admin/showEntities/gameObjects", gameObjectService);
+        return controllerUtility.viewGameObjectsPage(
+                "anonym/showEntities/gameObjects");
     }
 
     @GetMapping("/gameObjects/{id}")
     public ModelAndView showGameObjectWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewGameObjectWithId(
-                "admin/entity/gameObject", id, gameObjectService);
+        return controllerUtility.viewGameObjectWithId(
+                "anonym/entity/gameObject", id);
     }
 }
