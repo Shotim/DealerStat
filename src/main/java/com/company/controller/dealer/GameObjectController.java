@@ -23,7 +23,8 @@ public class GameObjectController {
     public ModelAndView showGameObjects() {
 
         int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = Controllers.viewGameObjectsPage("dealer/showEntities/gameObjects", gameObjectService);
+        ModelAndView modelAndView = Controllers.viewGameObjectsPage(
+                "dealer/showEntities/gameObjects", gameObjectService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -32,7 +33,8 @@ public class GameObjectController {
     public ModelAndView showGameObjectWithId(@PathVariable("id") String id) {
 
         int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = Controllers.viewGameObjectWithId("dealer/entity/gameObject", id, gameObjectService);
+        ModelAndView modelAndView = Controllers.viewGameObjectWithId(
+                "dealer/entity/gameObject", id, gameObjectService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }

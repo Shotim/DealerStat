@@ -19,9 +19,10 @@ public class CommentController {
     private CommentService commentService;
 
     @PutMapping("/posts/{postId}/comments/{commentId}")
-    public ModelAndView editComment(@PathVariable("postId") String postId,
-                                    @PathVariable("commentId") String commentId,
-                                    @ModelAttribute("comment") Comment comment) {
+    public ModelAndView editComment(
+            @PathVariable("postId") String postId,
+            @PathVariable("commentId") String commentId,
+            @ModelAttribute("comment") Comment comment) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         comment.setId(Integer.parseInt(commentId));
@@ -33,8 +34,9 @@ public class CommentController {
     }
 
     @PostMapping("/post/{id}/comment")
-    public ModelAndView createComment(@PathVariable("id") String postId,
-                                      @ModelAttribute("comment") Comment comment) {
+    public ModelAndView createComment(
+            @PathVariable("id") String postId,
+            @ModelAttribute("comment") Comment comment) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         Controllers.addDefaultComment(comment, postId, dealerId, commentService);

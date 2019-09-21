@@ -25,12 +25,14 @@ public class PostController {
     @GetMapping("/posts")
     public ModelAndView showPosts() {
 
-        return Controllers.viewPostsPage("anonym/showEntities/posts", postService);
+        return Controllers.viewPostsPage(
+                "anonym/showEntities/posts", postService);
     }
 
     @GetMapping("/posts/{id}")
     public ModelAndView showPostWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewPostWithId("anonym/entity/post", id, postService, gameObjectService, commentService);
+        return Controllers.viewPostWithId(
+                "anonym/entity/post", id, postService, gameObjectService, commentService);
     }
 }

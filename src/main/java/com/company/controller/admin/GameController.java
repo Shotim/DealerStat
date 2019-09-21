@@ -22,12 +22,14 @@ public class GameController {
     @GetMapping("/games")
     public ModelAndView showGames() {
 
-        return Controllers.viewGamesPage("admin/showEntities/games", gameService);
+        return Controllers.viewGamesPage(
+                "admin/showEntities/games", gameService);
     }
 
     @GetMapping("/games/{id}")
     public ModelAndView showGameWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewGameWithId("admin/entity/game", id, gameService, gameObjectService);
+        return Controllers.viewGameWithId(
+                "admin/entity/game", id, gameService, gameObjectService);
     }
 }

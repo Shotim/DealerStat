@@ -1,5 +1,6 @@
 package com.company.controller.admin;
 
+import com.company.service.comment.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor
 public class CommentController {
 
-    public com.company.service.comment.CommentService commentService;
+    public CommentService commentService;
 
     @GetMapping("/unapprovedComments")
     public ModelAndView showUnapprovedComments() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/admin/showEntities/unapprovedComments");
-        modelAndView.addObject("comments", commentService.findUnapprovedComments());
+        modelAndView.addObject("comments",
+                commentService.findUnapprovedComments());
         return modelAndView;
     }
 

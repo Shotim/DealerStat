@@ -35,7 +35,7 @@ public class CommentController {
         comment.setId(Integer.parseInt(commentId));
         commentService.editComment(comment);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/posts/" + postId);
+        modelAndView.setViewName("redirect:/anonym/posts/" + postId);
         return modelAndView;
     }
 }

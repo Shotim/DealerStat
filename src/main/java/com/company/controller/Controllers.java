@@ -18,20 +18,11 @@ public class Controllers {
                 SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
-    public static ModelAndView viewDealersPost(int dealerId, String postId, String file, PostService postService, GameObjectService gameObjectService, CommentService commentService) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/entity/" + file);
-        modelAndView.addObject("post",
-                postService.findPost(Integer.parseInt(postId)));
-        modelAndView.addObject("gameobjects",
-                gameObjectService.findGameObjectsFromPost(Integer.parseInt(postId)));
-        modelAndView.addObject("comments",
-                commentService.findCommentsFromPost(Integer.parseInt(postId)));
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
-    }
+    public static void addDefaultComment(Comment comment,
+                                         String postId,
+                                         int authorId,
+                                         CommentService commentService) {
 
-    public static void addDefaultComment(Comment comment, String postId, int authorId, CommentService commentService) {
         comment.setId(Comment.DEFAULT_ID);
         comment.setPostId(Integer.parseInt(postId));
         comment.setCreatedAt(new Date(new java.util.Date().getTime()));
@@ -53,7 +44,11 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewDealerWithId(String viewName, String dealerId, UserService userService, PostService postService) {
+    public static ModelAndView viewDealerWithId(String viewName,
+                                                String dealerId,
+                                                UserService userService,
+                                                PostService postService) {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("dealer",
@@ -70,7 +65,11 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewGameWithId(String viewName, String gameId, GameService gameService, GameObjectService gameObjectService) {
+    public static ModelAndView viewGameWithId(String viewName,
+                                              String gameId,
+                                              GameService gameService,
+                                              GameObjectService gameObjectService) {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("game",
@@ -87,7 +86,10 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewGameObjectWithId(String viewName, String gameObjectId, GameObjectService gameObjectService) {
+    public static ModelAndView viewGameObjectWithId(String viewName,
+                                                    String gameObjectId,
+                                                    GameObjectService gameObjectService) {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("gameobject",
@@ -103,7 +105,12 @@ public class Controllers {
         return modelAndView;
     }
 
-    public static ModelAndView viewPostWithId(String viewName, String postId, PostService postService, GameObjectService gameObjectService, CommentService commentService) {
+    public static ModelAndView viewPostWithId(String viewName,
+                                              String postId,
+                                              PostService postService,
+                                              GameObjectService gameObjectService,
+                                              CommentService commentService) {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(viewName);
         modelAndView.addObject("post",

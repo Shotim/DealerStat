@@ -19,12 +19,14 @@ public class GameObjectController {
     @GetMapping("/gameObjects")
     public ModelAndView showGameObjects() {
 
-        return Controllers.viewGameObjectsPage("admin/showEntities/gameObjects", gameObjectService);
+        return Controllers.viewGameObjectsPage(
+                "admin/showEntities/gameObjects", gameObjectService);
     }
 
     @GetMapping("/gameObjects/{id}")
     public ModelAndView showGameObjectWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewGameObjectWithId("admin/entity/gameObject", id, gameObjectService);
+        return Controllers.viewGameObjectWithId(
+                "admin/entity/gameObject", id, gameObjectService);
     }
 }
