@@ -17,17 +17,10 @@ public class CommentController {
     public com.company.service.comment.CommentService commentService;
 
     @GetMapping("/unapprovedComments")
-    public ModelAndView unapprovedComments() {
+    public ModelAndView showUnapprovedComments() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/admin/showEntities/unapprovedComments");
         modelAndView.addObject("comments", commentService.findUnapprovedComments());
-        return modelAndView;
-    }
-
-    @GetMapping("/unapprovedComments/{id}")
-    public ModelAndView approveComment(@PathVariable("id") String id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/editEntity/approveComment");
         return modelAndView;
     }
 
