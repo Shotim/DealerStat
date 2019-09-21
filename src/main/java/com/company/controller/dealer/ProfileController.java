@@ -77,21 +77,32 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @GetMapping("/profile/posts/{id}")
-    public ModelAndView showDealersPost(@PathVariable("id") String id) {
+    @GetMapping("/profile/posts/{postId}")
+    public ModelAndView showDealersPost(@PathVariable("postId") String id) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         return Controllers.viewDealersPost(dealerId, id, "myPost", postService, gameObjectService, commentService);
     }
 
-    @GetMapping("/profile/posts/{id}/gameObjects")
-    public ModelAndView addGameObjectToPost(@PathVariable("id") int id) {
+    @DeleteMapping("/profile/posts/{postId}")
+    public ModelAndView deletePostFromUser(
+            @PathVariable("postId") String postId,
+            Model model) {
 
         int dealerId = Controllers.sessionDealerId(userService);
+        postService.removePost(Integer.parseInt(postId));
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/addEntity/newGameObjects");
-        modelAndView.addObject("games",
-                gameService.findAllGames());
+        modelAndView.setViewName("redirect:/id" + dealerId + "/profile");
+        modelAndView.addObject("dealerId", dealerId);
+        return modelAndView;
+    }
+
+    @GetMapping("/profile/posts/{postId}/gameObjects")
+    public ModelAndView addGameObjectToPost(@PathVariable("postId") int id) {
+
+        int dealerId = Controllers.sessionDealerId(userService);
+        ModelAndView modelAndView = Controllers.viewGamesPage(
+                "dealer/addEntity/newGameObjects", gameService);
         modelAndView.addObject("id", id);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
@@ -101,19 +112,15 @@ public class ProfileController {
     public ModelAndView addGameWhileCreatingPost(
             @PathVariable("gameId") String gameId,
             @PathVariable("postId") String postId) {
-        ModelAndView modelAndView = new ModelAndView();
         int dealerId = Controllers.sessionDealerId(userService);
-        modelAndView.setViewName("dealer/entity/gameFromPost");
-        modelAndView.addObject("game",
-                gameService.findGame(Integer.parseInt(gameId)));
-        modelAndView.addObject("gameobjects",
-                gameObjectService.findGameObjectsOfGame(Integer.parseInt(gameId)));
+        ModelAndView modelAndView = Controllers.viewGameWithId(
+                "dealer/entity/gameFromPost", gameId, gameService, gameObjectService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
 
-    @GetMapping("/profile/posts/{id}/gameObjects/game")
-    public ModelAndView createGame(@PathVariable("id") String id) {
+    @GetMapping("/profile/posts/{postId}/gameObjects/game")
+    public ModelAndView createGame(@PathVariable("postId") String id) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         ModelAndView modelAndView = new ModelAndView();
@@ -122,15 +129,15 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @PostMapping("/profile/posts/{id}/gameObjects/game")
-    public ModelAndView createGame(@PathVariable("id") String id,
+    @PostMapping("/profile/posts/{postId}/gameObjects/game")
+    public ModelAndView createGame(@PathVariable("postId") String postId,
                                    @ModelAttribute("game") Game game) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         game.setId(Game.DEFAULT_ID);
         gameService.addGame(game);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/id" + dealerId + "/profile/post/" + id + "/newGameObjects");
+        modelAndView.setViewName("redirect:/id" + dealerId + "/profile/post/" + postId + "/newGameObjects");
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -209,30 +216,6 @@ public class ProfileController {
                 Integer.parseInt(gameObjectId), Integer.parseInt(postId));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/id" + dealerId + "/profile/post/" + postId);
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
-    }
-
-    @GetMapping("/profile/posts/{postId}")
-    public ModelAndView deletePostFromUser(
-            @PathVariable("postId") String postId) {
-
-        int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/deleteEntity/deletePostFromUser");
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
-    }
-
-    @DeleteMapping("/profile/posts/{postId}")
-    public ModelAndView deletePostFromUser(
-            @PathVariable("postId") String postId,
-            Model model) {
-
-        int dealerId = Controllers.sessionDealerId(userService);
-        postService.removePost(Integer.parseInt(postId));
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/id" + dealerId + "/profile");
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
