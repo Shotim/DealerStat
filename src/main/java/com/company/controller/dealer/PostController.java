@@ -30,7 +30,7 @@ public class PostController {
     public ModelAndView showPosts() {
 
         int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = Controllers.viewPostsPage("dealer/showEntities/posts",postService);
+        ModelAndView modelAndView = Controllers.viewPostsPage("dealer/showEntities/posts", postService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -39,6 +39,6 @@ public class PostController {
     public ModelAndView showPostWithId(@PathVariable("id") String id) {
 
         int dealerId = Controllers.sessionDealerId(userService);
-        return Controllers.addPostToModel(dealerId, id, "post", postService, gameObjectService, commentService);
+        return Controllers.viewDealersPost(dealerId, id, "post", postService, gameObjectService, commentService);
     }
 }

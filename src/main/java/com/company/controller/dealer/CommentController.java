@@ -18,7 +18,7 @@ public class CommentController {
 
     private CommentService commentService;
 
-    @PostMapping("/posts/{postId}/comments/{commentId}")
+    @PutMapping("/posts/{postId}/comments/{commentId}")
     public ModelAndView editComment(@PathVariable("postId") String postId,
                                     @PathVariable("commentId") String commentId,
                                     @ModelAttribute("comment") Comment comment) {
@@ -27,7 +27,7 @@ public class CommentController {
         comment.setId(Integer.parseInt(commentId));
         commentService.editComment(comment);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/id"+dealerId+"/post/" + postId);
+        modelAndView.setViewName("redirect:/id" + dealerId + "/post/" + postId);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -39,7 +39,7 @@ public class CommentController {
         int dealerId = Controllers.sessionDealerId(userService);
         Controllers.addDefaultComment(comment, postId, dealerId, commentService);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect: /my/post/" + postId);
+        modelAndView.setViewName("redirect: /id" + dealerId + "/post/" + postId);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -52,7 +52,7 @@ public class CommentController {
         int dealerId = Controllers.sessionDealerId(userService);
         commentService.removeComment(Integer.parseInt(commentId));
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/my/post/" + postId);
+        modelAndView.setViewName("redirect:/id" + dealerId + "/post/" + postId);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
