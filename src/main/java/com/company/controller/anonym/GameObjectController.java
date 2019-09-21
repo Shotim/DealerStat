@@ -25,6 +25,6 @@ public class GameObjectController {
     @GetMapping("/gameObjects/{id}")
     public ModelAndView showGameObjectWithId(@PathVariable("id") String id) {
 
-        return Controllers.viewGameObjectWithId("anonym/entity/gameObject",id,gameObjectService);
+        return Controllers.viewGameObjectWithId("anonym/entity/gameObject", id, gameObjectService);
     }
 }

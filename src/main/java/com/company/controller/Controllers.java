@@ -18,7 +18,7 @@ public class Controllers {
                 SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
-    public static ModelAndView addPostToModel(int dealerId, String postId, String file, PostService postService, GameObjectService gameObjectService, CommentService commentService) {
+    public static ModelAndView viewDealersPost(int dealerId, String postId, String file, PostService postService, GameObjectService gameObjectService, CommentService commentService) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("dealer/entity/" + file);
         modelAndView.addObject("post",
