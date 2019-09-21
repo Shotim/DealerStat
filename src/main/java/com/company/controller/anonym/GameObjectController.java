@@ -17,13 +17,13 @@ public class GameObjectController {
     private GameObjectService gameObjectService;
 
     @GetMapping("/gameObjects")
-    public ModelAndView gameObjects() {
+    public ModelAndView showGameObjects() {
 
         return Controllers.viewGameObjectsPage("anonym/showEntities/gameObjects", gameObjectService);
     }
 
     @GetMapping("/gameObjects/{id}")
-    public ModelAndView gameObject(@PathVariable("id") String id) {
+    public ModelAndView showGameObjectWithId(@PathVariable("id") String id) {
 
         return Controllers.viewGameObjectWithId("anonym/entity/gameObject",id,gameObjectService);
     }

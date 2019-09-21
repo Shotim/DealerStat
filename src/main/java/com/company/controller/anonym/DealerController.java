@@ -20,14 +20,14 @@ public class DealerController {
     private PostService postService;
 
     @GetMapping("/dealers")
-    public ModelAndView dealers() {
+    public ModelAndView showDealers() {
 
         return Controllers.viewDealersPage(
                 "anonym/showEntities/dealers", userService);
     }
 
     @GetMapping("/dealers/{id}")
-    public ModelAndView dealer(@PathVariable("id") String id) {
+    public ModelAndView showDealerWithId(@PathVariable("id") String id) {
 
         return Controllers.viewDealerWithId(
                 "anonym/entity/dealer", id, userService, postService);

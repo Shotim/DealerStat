@@ -23,13 +23,13 @@ public class PostController {
     private CommentService commentService;
 
     @GetMapping("/posts")
-    public ModelAndView posts() {
+    public ModelAndView showPosts() {
 
         return Controllers.viewPostsPage("anonym/showEntities/posts", postService);
     }
 
     @GetMapping("/posts/{id}")
-    public ModelAndView post(@PathVariable("id") String id) {
+    public ModelAndView showPostWithId(@PathVariable("id") String id) {
 
         return Controllers.viewPostWithId("anonym/entity/post", id, postService, gameObjectService, commentService);
     }
