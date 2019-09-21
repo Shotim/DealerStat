@@ -7,7 +7,6 @@ import com.company.validation.WebAppValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -33,9 +32,6 @@ public class RegistrationController {
     @Autowired
     public WebAppValidator validator;
 
-    @Autowired
-    public UserDetailsService userDetailsService;
-
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout) {
@@ -57,7 +53,7 @@ public class RegistrationController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(model);
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        modelAndView.addObject("user",userService.findUser(userEmail));
+        modelAndView.addObject("user", userService.findUser(userEmail));
         modelAndView.setViewName("start/welcome");
         return modelAndView;
     }

@@ -1,10 +1,9 @@
-package com.company.controller.dealer;
+package com.company.controller.anonym;
 
 import com.company.controller.Controllers;
 import com.company.service.comment.CommentService;
 import com.company.service.gameobject.GameObjectService;
 import com.company.service.post.PostService;
-import com.company.service.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/id{dealerId}")
+@RequestMapping("/anonym/")
 @AllArgsConstructor
 public class PostController {
-
-    private UserService userService;
 
     private PostService postService;
 
@@ -25,20 +22,15 @@ public class PostController {
 
     private CommentService commentService;
 
-
     @GetMapping("/posts")
-    public ModelAndView showPosts() {
+    public ModelAndView posts() {
 
-        int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = Controllers.viewPostsPage("dealer/showEntities/posts",postService);
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
+        return Controllers.viewPostsPage("anonym/showEntities/posts", postService);
     }
 
     @GetMapping("/posts/{id}")
-    public ModelAndView showPostWithId(@PathVariable("id") String id) {
+    public ModelAndView post(@PathVariable("id") String id) {
 
-        int dealerId = Controllers.sessionDealerId(userService);
-        return Controllers.addPostToModel(dealerId, id, "post", postService, gameObjectService, commentService);
+        return Controllers.viewPostWithId("anonym/entity/post", id, postService, gameObjectService, commentService);
     }
 }

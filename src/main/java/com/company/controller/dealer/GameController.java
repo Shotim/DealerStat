@@ -1,10 +1,10 @@
 package com.company.controller.dealer;
 
+import com.company.controller.Controllers;
 import com.company.service.game.GameService;
 import com.company.service.gameobject.GameObjectService;
 import com.company.service.user.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,12 +25,9 @@ public class GameController {
     @GetMapping("/games")
     public ModelAndView showGames() {
 
-        int dealerId = userService.findUser(
-                SecurityContextHolder.getContext().getAuthentication().getName()).getId();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/showEntities/games");
-        modelAndView.addObject("games",
-                gameService.findAllGames());
+        int dealerId = Controllers.sessionDealerId(userService);
+        ModelAndView modelAndView = Controllers.viewGamesPage(
+                "dealer/showEntities/games", gameService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -38,14 +35,9 @@ public class GameController {
     @GetMapping("/games/{id}")
     public ModelAndView showGameWithId(@PathVariable("id") String id) {
 
-        int dealerId = userService.findUser(
-                SecurityContextHolder.getContext().getAuthentication().getName()).getId();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/entity/game");
-        modelAndView.addObject("game",
-                gameService.findGame(Integer.parseInt(id)));
-        modelAndView.addObject("gameobjects",
-                gameObjectService.findGameObjectsOfGame(Integer.parseInt(id)));
+        int dealerId = Controllers.sessionDealerId(userService);
+        ModelAndView modelAndView = Controllers.viewGameWithId(
+                "dealer/entity/game", id, gameService, gameObjectService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }

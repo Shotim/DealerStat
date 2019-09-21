@@ -1,9 +1,7 @@
 package com.company.controller.dealer;
 
 import com.company.controller.Controllers;
-import com.company.entity.Comment;
 import com.company.entity.Game;
-import com.company.entity.Post;
 import com.company.entity.gameObject.GameObject;
 import com.company.entity.gameObject.GameObjectStatus;
 import com.company.entity.user.User;
@@ -40,9 +38,8 @@ public class ProfileController {
 
     @GetMapping("/")
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/start/index");
-        return modelAndView;
+
+        return Controllers.startPage("dealer/start/index");
     }
 
     @GetMapping("/profile")
@@ -55,6 +52,29 @@ public class ProfileController {
                 userService.findUser(dealerId));
         modelAndView.addObject("posts",
                 postService.findPostsOfDealer(dealerId));
+        modelAndView.addObject("dealerId", dealerId);
+        return modelAndView;
+    }
+
+    @PostMapping("/profile")
+    public ModelAndView editUser(@ModelAttribute("dealer") User dealer) {
+
+        int dealerId = Controllers.sessionDealerId(userService);
+        dealer.setId(dealerId);
+        dealer.setPassword(encoder.encode(dealer.getPassword()));
+        userService.editUser(dealer);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/my/profile");
+        modelAndView.addObject("dealerId", dealerId);
+        return modelAndView;
+    }
+
+    @PutMapping("/profile/post")
+    public ModelAndView createPost(Model model) {
+
+        int dealerId = Controllers.sessionDealerId(userService);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/my/profile");
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -106,7 +126,7 @@ public class ProfileController {
 
     @PutMapping("/profile/posts/{id}/gameObjects/game")
     public ModelAndView createGame(@PathVariable("id") String id,
-                                @ModelAttribute("game") Game game) {
+                                   @ModelAttribute("game") Game game) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         game.setId(Game.DEFAULT_ID);
@@ -119,7 +139,7 @@ public class ProfileController {
 
     @GetMapping("/profile/posts/{postId}/gameObjects/game/{gameId}/gameObject")
     public ModelAndView createGameObject(@PathVariable("postId") String postId,
-                                      @PathVariable("gameId") String gameId) {
+                                         @PathVariable("gameId") String gameId) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         ModelAndView modelAndView = new ModelAndView();
@@ -130,8 +150,8 @@ public class ProfileController {
 
     @PutMapping("/profile/posts/{postId}/gameObjects/game/{gameId}/gameObject")
     public ModelAndView createGameObject(@PathVariable("postId") String postId,
-                                      @PathVariable("gameId") String gameId,
-                                      @ModelAttribute("gameobject") GameObject object) {
+                                         @PathVariable("gameId") String gameId,
+                                         @ModelAttribute("gameobject") GameObject object) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         object.setGameId(Integer.parseInt(gameId));
@@ -148,8 +168,8 @@ public class ProfileController {
 
     @GetMapping("/profile/posts/{postId}/gameObjects/game/{gameId}/gameObjects/{objectId}")
     public ModelAndView createGameObjectToPost(@PathVariable("postId") String postId,
-                                            @PathVariable("objectId") String objectId,
-                                            @PathVariable("gameId") String gameId) {
+                                               @PathVariable("objectId") String objectId,
+                                               @PathVariable("gameId") String gameId) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         ModelAndView modelAndView = new ModelAndView();
@@ -160,34 +180,13 @@ public class ProfileController {
 
     @PutMapping("/profile/posts/{postId}/gameObjects/game/{gameId}/gameObjects/{objectId}")
     public ModelAndView createGameObjectToPost(@PathVariable("postId") String postId,
-                                         @PathVariable("objectId") String objectId) {
+                                               @PathVariable("objectId") String objectId) {
 
         int dealerId = Controllers.sessionDealerId(userService);
         gameObjectService.addGameObjectToPost(
                 Integer.parseInt(objectId), Integer.parseInt(postId));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/my/profile/post/" + postId);
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
-    }
-
-    @GetMapping("/profile/post")
-    public ModelAndView createPost() {
-
-        int dealerId = Controllers.sessionDealerId(userService);
-        postService.addPost(new Post(Post.DEFAULT_ID, dealerId));
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/addEntity/newPost");
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
-    }
-
-    @PutMapping("/profile/post")
-    public ModelAndView createPost(Model model) {
-
-        int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/my/profile");
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -234,19 +233,6 @@ public class ProfileController {
             Model model) {
 
         int dealerId = Controllers.sessionDealerId(userService);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/my/profile");
-        modelAndView.addObject("dealerId", dealerId);
-        return modelAndView;
-    }
-
-    @PostMapping("/profile")
-    public ModelAndView editUser(@ModelAttribute("dealer") User dealer) {
-
-        int dealerId = Controllers.sessionDealerId(userService);
-        dealer.setId(dealerId);
-        dealer.setPassword(encoder.encode(dealer.getPassword()));
-        userService.editUser(dealer);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/my/profile");
         modelAndView.addObject("dealerId", dealerId);

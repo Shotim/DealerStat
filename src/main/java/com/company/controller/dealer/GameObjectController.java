@@ -1,9 +1,9 @@
 package com.company.controller.dealer;
 
+import com.company.controller.Controllers;
 import com.company.service.gameobject.GameObjectService;
 import com.company.service.user.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +22,8 @@ public class GameObjectController {
     @GetMapping("/gameObjects")
     public ModelAndView showGameObjects() {
 
-        int dealerId = userService.findUser(
-                SecurityContextHolder.getContext().getAuthentication().getName()).getId();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/showEntities/gameObjects");
-        modelAndView.addObject("gameobjects", gameObjectService.findAllGameObjects());
+        int dealerId = Controllers.sessionDealerId(userService);
+        ModelAndView modelAndView = Controllers.viewGameObjectsPage("dealer/showEntities/gameObjects",gameObjectService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -34,12 +31,8 @@ public class GameObjectController {
     @GetMapping("/gameObjects/{id}")
     public ModelAndView showGameObjectWithId(@PathVariable("id") String id) {
 
-        int dealerId = userService.findUser(
-                SecurityContextHolder.getContext().getAuthentication().getName()).getId();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/entity/gameObject");
-        modelAndView.addObject("gameobject",
-                gameObjectService.findGameObject(Integer.parseInt(id)));
+        int dealerId = Controllers.sessionDealerId(userService);
+        ModelAndView modelAndView = Controllers.viewGameObjectWithId("dealer/entity/gameObject",id,gameObjectService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }

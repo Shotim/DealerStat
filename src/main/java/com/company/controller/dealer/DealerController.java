@@ -1,5 +1,6 @@
 package com.company.controller.dealer;
 
+import com.company.controller.Controllers;
 import com.company.service.post.PostService;
 import com.company.service.user.UserService;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,8 @@ public class DealerController {
     public ModelAndView showDealers() {
 
         int dealerId = sessionDealerId(userService);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/showEntities/dealers");
-        modelAndView.addObject("users",
-                userService.findAllUsers());
+        ModelAndView modelAndView = Controllers.viewDealersPage(
+                "dealer/showEntities/dealers", userService);
         modelAndView.addObject("dealerId", dealerId);
         return modelAndView;
     }
@@ -36,11 +35,9 @@ public class DealerController {
     public ModelAndView showDealerWithId(@PathVariable("id") String id) {
 
         int dealerId = sessionDealerId(userService);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("dealer/entity/dealer");
+        ModelAndView modelAndView = Controllers.viewDealerWithId(
+                "dealer/entity/dealer", id, userService, postService);
         modelAndView.addObject("dealerId", dealerId);
-        modelAndView.addObject("dealer", userService.findUser(Integer.parseInt(id)));
-        modelAndView.addObject("posts", postService.findPostsOfDealer(Integer.parseInt(id)));
         return modelAndView;
     }
 }
